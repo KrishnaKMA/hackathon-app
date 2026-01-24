@@ -1,0 +1,12 @@
+The MRI images (with and without tumor) are for teaching purposes prepared from the below source data. They are already sorted in two directories for our two classes to classify/predict.
+
+The ownership of the data is: "Brain MRI Images for Brain Tumor Detection" https://www.kaggle.com/navoneel/brain-mri-images-for-brain-tumor-detection Navoneel Chakrabarty (2019), version 1.0.
+
+For this project, we converted the original images into grayscale png images.
+
+The loaded data contains two folders with grayscale MRI brain images in png format
+
+Folder "yes" contains images with tumors
+Folder "no" contains images without tumors
+Folder "benchmark" contains independent test images
+Note: Ideally, the input images are all of the same pixel width and height. This way, we profit from the best resolution available from this data.
