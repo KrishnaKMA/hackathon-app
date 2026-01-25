@@ -10,13 +10,13 @@
 <body>
     <nav>
         <div class="logo">
-            <div class="logo-icon">🧠</div>
             NeuroDetect
         </div>
         <ul>
-            <li><a class="nav-link active" onclick="showPage('home', event)">🏠 Home</a></li>
-            <li><a class="nav-link" onclick="showPage('detector', event)">🔍 Detector</a></li>
-            <li><a class="nav-link" onclick="showPage('citations', event)">📚 Citations</a></li>
+            <li><a class="nav-link active" onclick="showPage('home', event)">Home</a></li>
+            <li><a class="nav-link" onclick="showPage('detector', event)">Detector</a></li>
+            <li><a class="nav-link" onclick="showPage('learn', event)">Learn</a></li>
+            <li><a class="nav-link" onclick="showPage('citations', event)">Citations</a></li>
         </ul>
     </nav>
 
@@ -24,37 +24,57 @@
         <!-- HOME PAGE -->
         <section id="home" class="page active">
             <div class="hero reveal">
-                <h1>NeuroDetect</h1>
+                <div class="hero-stage synapses-stage">
+                    <div class="synapses-frame">
+                        <iframe
+                            title="Synapses"
+                            src="https://codepen.io/prisoner849/embed/RwjQaeO?default-tab=result&theme-id=dark&editable=false&view=preview"
+                            allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; xr-spatial-tracking"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+                    <div class="brand-overlay">Neuro Detect<span>AI DIAGNOSTICS</span></div>
+                    <div class="brain-hint">Move your cursor</div>
+                </div>
+
                 <p>Advanced AI-Powered Brain Tumor Detection System</p>
                 <p class="hero-subtitle">Utilizing Deep Learning and Explainable AI to assist in medical imaging analysis</p>
                 <button class="cta-button" onclick="showPage('detector', event)">Start Analysis →</button>
 
-                <div class="features">
-                    <div class="feature-card reveal delay-80">
+                <div class="about-card reveal delay-80">
+                    <h2>What is NeuroDetect?</h2>
+                    <p>NeuroDetect is an educational, AI-powered brain tumor detection demo that analyzes MRI images and highlights regions the model focuses on. It’s designed to help users understand how machine learning can support medical imaging workflows.</p>
+                    <p>Brain tumors can affect people of any age and impact patients, families, and care teams. Early review and accurate interpretation matter, which is why tools that provide fast, consistent insights can be valuable alongside clinical expertise.</p>
+                    <p>This experience is for learning and research only—not medical advice. Always consult qualified healthcare professionals for diagnosis and treatment decisions.</p>
+                </div>
+
+                <div class="features carousel reveal">
+                    <div class="feature-card">
                         <h3>🎯 High Accuracy</h3>
                         <p>89.7% accuracy on multi-class brain tumor classification with 0.9879 AUC score.</p>
                     </div>
-                    <div class="feature-card reveal delay-140">
+                    <div class="feature-card">
                         <h3>🧠 Explainable AI</h3>
                         <p>Grad-CAM heatmaps show exactly where the model focuses for transparent decision-making.</p>
                     </div>
-                    <div class="feature-card reveal delay-200">
+                    <div class="feature-card">
                         <h3>🏥 Multi-Class Detection</h3>
                         <p>Classifies: Glioma, Meningioma, Pituitary Tumors, and No Tumor cases.</p>
                     </div>
-                    <div class="feature-card reveal delay-260">
+                    <div class="feature-card">
                         <h3>⚡ Real-Time Analysis</h3>
                         <p>Fast inference powered by MobileNetV2 transfer learning architecture.</p>
                     </div>
-                    <div class="feature-card reveal delay-320">
+                    <div class="feature-card">
                         <h3>📊 Confidence Scoring</h3>
                         <p>Get probability scores for all classes to understand model confidence levels.</p>
                     </div>
-                    <div class="feature-card reveal delay-380">
+                    <div class="feature-card">
                         <h3>🔒 Privacy First</h3>
-                        <p>Your images are processed locally and not stored or retained.</p>
+                        <p>Your images are processed securely and not stored or retained.</p>
                     </div>
                 </div>
+                <div class="carousel-dots" id="featureDots" aria-label="Feature carousel navigation"></div>
             </div>
         </section>
 
@@ -83,11 +103,61 @@
                     <div class="assistant-section">
                         <h3>🤖 AI Assistant</h3>
                         <p class="assistant-hint">Ask questions about your scan results</p>
-                        <div id="chatMessages" class="chat-messages"></div>
+                        <div id="detectorChatMessages" class="chat-messages"></div>
                         <div class="chat-input-container">
-                            <input type="text" id="chatInput" placeholder="Ask about your results..." />
-                            <button id="chatSendBtn">Send</button>
+                            <input type="text" id="detectorChatInput" placeholder="Ask about your results..." />
+                            <button id="detectorChatSendBtn">Send</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARN PAGE -->
+        <section id="learn" class="page">
+            <div class="learn-container">
+                <h1 class="reveal gradient-title">Learn About Brain Tumors</h1>
+                <p class="learn-intro reveal">A quick, evidence-based overview of brain tumor burden, common types, and how AI can support clinical workflows. This section is for education only and does not replace medical advice.</p>
+
+                <div class="learn-grid">
+                    <div class="learn-card reveal delay-80">
+                        <h3>📊 U.S. malignant brain & spinal cord tumors (2026)</h3>
+                        <ul>
+                            <li>~24,740 new cases</li>
+                            <li>~18,350 deaths</li>
+                            <li>~1% of all new U.S. cancers</li>
+                        </ul>
+                        <p class="learn-source"><a href="https://www.cancer.org/cancer/types/brain-spinal-cord-tumors-adults/about/key-statistics.html" target="_blank">American Cancer Society (Key Statistics)</a></p>
+                    </div>
+
+                    <div class="learn-card reveal delay-140">
+                        <h3>🌍 Global & U.S. incidence (latest NCI PDQ)</h3>
+                        <ul>
+                            <li>2022 worldwide: ~321,476 new cases; ~248,305 deaths</li>
+                            <li>2025 U.S.: ~24,820 new cases; ~18,330 deaths</li>
+                            <li>U.S. incidence: 6.2 per 100,000; mortality: 4.4 per 100,000</li>
+                        </ul>
+                        <p class="learn-source"><a href="https://www.cancer.gov/types/brain/hp/adult-brain-treatment-pdq" target="_blank">NCI PDQ – CNS Tumors (Incidence & Mortality)</a></p>
+                    </div>
+
+                    <div class="learn-card reveal delay-200">
+                        <h3>🧬 Common tumor types (CBTRUS)</h3>
+                        <ul>
+                            <li>Gliomas: 22.2% of all tumors</li>
+                            <li>Glioblastoma: 52.2% of malignant tumors</li>
+                            <li>Meningioma: 57.4% of non-malignant tumors</li>
+                        </ul>
+                        <p class="learn-source"><a href="https://pubmed.ncbi.nlm.nih.gov/41092086/" target="_blank">CBTRUS Statistical Report (2018–2022)</a></p>
+                    </div>
+
+                    <div class="learn-card reveal delay-260">
+                        <h3>🤖 Why NeuroDetect helps</h3>
+                        <ul>
+                            <li>Fast triage with multi-class tumor type predictions</li>
+                            <li>Explainability via heatmaps to build trust</li>
+                            <li>Consistent outputs to support clinical review</li>
+                        </ul>
+                        <p class="learn-note">Use results alongside professional medical evaluation.</p>
                     </div>
                 </div>
             </div>
@@ -148,14 +218,55 @@
                         <p><strong>Test Set:</strong> 1,311 images from Kaggle dataset</p>
                     </div>
                 </div>
+
+                                <div class="citation-section reveal delay-420">
+                    <h3>🧠 3D Brain Model</h3>
+                    <div class="citation-item">
+                        <p><a href="https://codepen.io/prisoner849/pen/RwjQaeO" target="_blank">CodePen — SYNAPSES by prisoner849</a></p>
+                    </div>
+                </div>
+<div class="citation-section reveal delay-380">
+                    <h3>📚 Education Sources</h3>
+                    <div class="citation-item">
+                        <p><a href="https://www.cancer.org/cancer/types/brain-spinal-cord-tumors-adults/about/key-statistics.html" target="_blank">American Cancer Society — Brain & Spinal Cord Tumors (Adults)</a></p>
+                        <p><a href="https://www.cancer.gov/types/brain/hp/adult-brain-treatment-pdq" target="_blank">NCI PDQ — Adult Central Nervous System Tumors</a></p>
+                        <p><a href="https://pubmed.ncbi.nlm.nih.gov/41092086/" target="_blank">CBTRUS Statistical Report (2018–2022)</a></p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
+
+    <div class="assistant-widget">
+        <button class="assistant-fab" id="assistantToggle" aria-expanded="false" aria-controls="assistantPanel" title="Ask NeuroDetect">
+            ?
+        </button>
+        <div class="assistant-panel" id="assistantPanel" aria-hidden="true">
+            <div class="assistant-panel-header">
+                <div>
+                    <div class="assistant-panel-title">Ask NeuroDetect</div>
+                    <div class="assistant-panel-subtitle">Education-only AI help.</div>
+                </div>
+                <button class="assistant-close" id="assistantClose" aria-label="Close assistant">&times;</button>
+            </div>
+            <div class="assistant-panel-body">
+                <div class="assistant-messages" id="assistantMessages">
+                    <div class="assistant-message assistant">Hi! I can explain the app, tumor types, and how to read results.</div>
+                </div>
+                <form class="assistant-form" id="assistantForm">
+                    <input id="assistantInput" type="text" placeholder="Ask about brain tumors or how this works..." autocomplete="off" />
+                    <button id="assistantSend" type="submit">Send</button>
+                </form>
+                <div class="assistant-status" id="assistantStatus">Powered by Gemini (server-side).</div>
+            </div>
+        </div>
+    </div>
 
     
     <script src="js/api.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/chat.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

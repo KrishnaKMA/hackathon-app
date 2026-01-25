@@ -1,12 +1,13 @@
 """FastAPI application for brain tumor detection."""
 
-from fastapi import FastAPI, UploadFile, File
+import os
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import numpy as np
 import httpx
 
-from config import CLASS_NAMES, CLASS_INFO, NUM_CLASSES, GEMINI_API_KEY
+from config import CLASS_NAMES, CLASS_INFO, NUM_CLASSES, GEMINI_API_KEY as CONFIG_GEMINI_API_KEY
 from model_loader import load_model
 from utils import preprocess_image, generate_heatmap_image
 
@@ -28,6 +29,9 @@ app.add_middleware(
 
 # Load model on startup
 model = load_model()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", CONFIG_GEMINI_API_KEY)
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
 
 @app.get("/health")
@@ -108,58 +112,55 @@ async def get_heatmap(file: UploadFile = File(...)):
 async def chat_with_assistant(request: ChatRequest):
     """
     Chat with AI assistant about brain tumor detection results.
-    
+
     Args:
         request: ChatRequest with message and optional prediction context
-        
+
     Returns:
         Dictionary with assistant response
     """
-    system_prompt = """You are a helpful medical AI assistant for NeuroDetect, a brain tumor detection system. 
-You help users understand their MRI scan analysis results. You can explain:
-- What different tumor types mean (glioma, meningioma, pituitary)
-- How to interpret confidence scores
-- General information about brain tumors
-- What the Grad-CAM heatmap shows
+    if not GEMINI_API_KEY:
+        raise HTTPException(status_code=500, detail="GEMINI_API_KEY not set on server.")
 
-IMPORTANT: Always remind users that this is for educational purposes only and they should consult 
-a qualified medical professional for actual diagnosis and treatment decisions.
+    system_prompt = (
+        "You are a helpful medical AI assistant for NeuroDetect, a brain tumor detection system. "
+        "You help users understand their MRI scan analysis results. You can explain: "
+        "- What different tumor types mean (glioma, meningioma, pituitary) "
+        "- How to interpret confidence scores "
+        "- General information about brain tumors "
+        "- What the Grad-CAM heatmap shows "
+        "IMPORTANT: Always remind users that this is for educational purposes only and they should consult "
+        "a qualified medical professional for actual diagnosis and treatment decisions. "
+        "Be concise, empathetic, and helpful. If prediction context is provided, reference it in your response."
+    )
 
-Be concise, empathetic, and helpful. If prediction context is provided, reference it in your response."""
-
-    # Build the prompt with context if available
     user_message = request.message
     if request.context:
         context_str = f"\n\nCurrent scan results: {request.context}"
         user_message = f"{user_message}{context_str}"
 
-    # Call Gemini API
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
-    
+    prompt = f"{system_prompt}\n\nUser: {user_message}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
+    headers = {"x-goog-api-key": GEMINI_API_KEY, "Content-Type": "application/json"}
     payload = {
-        "contents": [
-            {
-                "parts": [
-                    {"text": f"{system_prompt}\n\nUser: {user_message}"}
-                ]
-            }
-        ],
-        "generationConfig": {
-            "temperature": 0.7,
-            "maxOutputTokens": 1024
-        }
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 1024},
     }
-    
+
     async with httpx.AsyncClient() as client:
-        response = await client.post(url, json=payload, timeout=30.0)
-        
+        response = await client.post(url, headers=headers, json=payload, timeout=30.0)
         if response.status_code != 200:
-            return {"error": f"Gemini API error: {response.text}", "response": None}
-        
+            raise HTTPException(status_code=502, detail=response.text)
+
         data = response.json()
-        
-        try:
-            assistant_response = data["candidates"][0]["content"]["parts"][0]["text"]
-            return {"response": assistant_response, "error": None}
-        except (KeyError, IndexError) as e:
-            return {"error": f"Failed to parse response: {str(e)}", "response": None}
+        text = (
+            data.get("candidates", [{}])[0]
+            .get("content", {})
+            .get("parts", [{}])[0]
+            .get("text", "")
+        )
+        if not text:
+            raise HTTPException(status_code=502, detail="Empty response from Gemini.")
+
+        reply = text.strip()
+        return {"response": reply, "reply": reply, "error": None}
