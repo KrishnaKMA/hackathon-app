@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fastapi
 uvicorn[standard]
 gunicorn
@@ -7,3 +8,14 @@ pillow
 scipy
 python-multipart
 httpx
+=======
+fastapi
+uvicorn[standard]
+gunicorn
+numpy
+tensorflow
+pillow
+scipy
+python-multipart
+httpx
+>>>>>>> c9ea56d (updated api so no leak)
