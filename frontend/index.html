@@ -4,536 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuroDetect - AI Brain Tumor Detection</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link rel="stylesheet" href="styles.css">
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
-            color: #e0e0e0;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 280px;
-            height: 100vh;
-            background: rgba(15, 15, 30, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(100, 200, 255, 0.1);
-            padding: 30px 20px;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 40px;
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        nav ul {
-            list-style: none;
-        }
-
-        nav li {
-            margin-bottom: 12px;
-        }
-
-        nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 8px;
-            color: #b0b0b0;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        nav a:hover, nav a.active {
-            background: rgba(100, 200, 255, 0.1);
-            color: #64c8ff;
-            border-left: 3px solid #64c8ff;
-            padding-left: 13px;
-        }
-
-        /* Main Content */
-        main {
-            margin-left: 280px;
-            padding: 40px;
-            min-height: 100vh;
-        }
-
-        .page {
-            display: none;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            transition-delay: var(--delay, 0ms);
-        }
-
-        .reveal.in-view {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .reveal {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
-
-        /* Home Page */
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 60px 40px;
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #a0a0a0;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 14px 40px;
-            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(100, 200, 255, 0.3);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 80px;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.05) 0%, rgba(255, 100, 229, 0.05) 100%);
-            border: 1px solid rgba(100, 200, 255, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: rgba(100, 200, 255, 0.3);
-            box-shadow: 0 10px 40px rgba(100, 200, 255, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .feature-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            color: #64c8ff;
-        }
-
-        .feature-card p {
-            color: #a0a0a0;
-            line-height: 1.6;
-        }
-
-        /* Detector Page */
-        .detector-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .detector-card {
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.05) 0%, rgba(255, 100, 229, 0.05) 100%);
-            border: 1px solid rgba(100, 200, 255, 0.1);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 30px;
-        }
-
-        .detector-card h2 {
-            font-size: 28px;
-            margin-bottom: 24px;
-            color: #64c8ff;
-        }
-
-        .input-section {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        input[type="file"] {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px 16px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(100, 200, 255, 0.2);
-            border-radius: 8px;
-            color: #e0e0e0;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        input[type="file"]:hover {
-            border-color: rgba(100, 200, 255, 0.4);
-        }
-
-        input[type="file"]::file-selector-button {
-            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        button {
-            padding: 12px 28px;
-            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(100, 200, 255, 0.3);
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            background: rgba(100, 200, 255, 0.1);
-            color: #64c8ff;
-        }
-
-        .status-badge.success {
-            background: rgba(0, 200, 100, 0.1);
-            color: #00c864;
-        }
-
-        .status-badge.error {
-            background: rgba(255, 64, 64, 0.1);
-            color: #ff4040;
-        }
-
-        #preview, #heatmap {
-            display: block;
-            width: 400px !important;
-            height: 400px !important;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-top: 30px;
-            border: 2px solid rgba(100, 200, 255, 0.2);
-        }
-
-        .result-section {
-            margin-top: 40px;
-        }
-
-        .main-result {
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.1) 0%, rgba(255, 100, 229, 0.1) 100%);
-            border-left: 4px solid #64c8ff;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
-        .main-result.tumor {
-            border-left-color: #ff4040;
-        }
-
-        .result-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .result-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #64c8ff;
-            margin-bottom: 8px;
-        }
-
-        .main-result.tumor .result-title {
-            color: #ff4040;
-        }
-
-        .result-message {
-            color: #a0a0a0;
-            font-size: 14px;
-        }
-
-        .result-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .prediction-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(100, 200, 255, 0.1);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .prediction-card.selected {
-            border-color: #64c8ff;
-            background: rgba(100, 200, 255, 0.05);
-            box-shadow: 0 4px 12px rgba(100, 200, 255, 0.2);
-        }
-
-        .class-name {
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: #e0e0e0;
-        }
-
-        .class-prob {
-            font-size: 28px;
-            font-weight: 700;
-            margin: 8px 0;
-            color: #64c8ff;
-        }
-
-        .class-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(100, 200, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            margin: 8px 0;
-        }
-
-        .class-fill {
-            height: 4px;
-            background: linear-gradient(90deg, #64c8ff 0%, #ff64e5 100%);
-            border-radius: 2px;
-            transition: width 0.5s ease;
-        }
-
-        .class-type {
-            font-size: 12px;
-            color: #808080;
-            margin-top: 4px;
-        }
-
-        details {
-            margin-top: 20px;
-            border: 1px solid rgba(100, 200, 255, 0.1);
-            border-radius: 8px;
-            padding: 16px;
-        }
-
-        summary {
-            cursor: pointer;
-            color: #64c8ff;
-            font-weight: 600;
-        }
-
-        pre {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 16px;
-            border-radius: 8px;
-            overflow-x: auto;
-            color: #00ff00;
-            font-size: 12px;
-            margin-top: 12px;
-        }
-
-        /* Citations Page */
-        .citations-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .citation-section {
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.05) 0%, rgba(255, 100, 229, 0.05) 100%);
-            border: 1px solid rgba(100, 200, 255, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 24px;
-        }
-
-        .citation-section h3 {
-            color: #64c8ff;
-            font-size: 18px;
-            margin-bottom: 16px;
-        }
-
-        .citation-item {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border-left: 3px solid #ff64e5;
-        }
-
-        .citation-item p {
-            color: #a0a0a0;
-            line-height: 1.6;
-            margin-bottom: 8px;
-        }
-
-        .citation-item a {
-            color: #64c8ff;
-            text-decoration: none;
-            word-break: break-all;
-        }
-
-        .citation-item a:hover {
-            text-decoration: underline;
-        }
-
-        .loading-container {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(100, 200, 255, 0.1);
-            border-top: 3px solid #64c8ff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 16px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            color: #a0a0a0;
-        }
-
-        .button-group {
-            margin-top: 24px;
-            display: flex;
-            gap: 12px;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                width: 100%;
-                height: auto;
-                position: relative;
-                border-right: none;
-                border-bottom: 1px solid rgba(100, 200, 255, 0.1);
-            }
-
-            main {
-                margin-left: 0;
-                padding: 20px;
-            }
-
-            .hero {
-                padding: 40px 20px;
-            }
-
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 <body>
     <nav>
@@ -542,9 +14,9 @@
             NeuroDetect
         </div>
         <ul>
-            <li><a class="nav-link active" onclick="showPage('home')">🏠 Home</a></li>
-            <li><a class="nav-link" onclick="showPage('detector')">🔍 Detector</a></li>
-            <li><a class="nav-link" onclick="showPage('citations')">📚 Citations</a></li>
+            <li><a class="nav-link active" onclick="showPage('home', event)">🏠 Home</a></li>
+            <li><a class="nav-link" onclick="showPage('detector', event)">🔍 Detector</a></li>
+            <li><a class="nav-link" onclick="showPage('citations', event)">📚 Citations</a></li>
         </ul>
     </nav>
 
@@ -554,31 +26,31 @@
             <div class="hero reveal">
                 <h1>NeuroDetect</h1>
                 <p>Advanced AI-Powered Brain Tumor Detection System</p>
-                <p style="font-size: 16px; color: #909090;">Utilizing Deep Learning and Explainable AI to assist in medical imaging analysis</p>
-                <button class="cta-button" onclick="showPage('detector')">Start Analysis →</button>
+                <p class="hero-subtitle">Utilizing Deep Learning and Explainable AI to assist in medical imaging analysis</p>
+                <button class="cta-button" onclick="showPage('detector', event)">Start Analysis →</button>
 
                 <div class="features">
-                    <div class="feature-card reveal" style="--delay: 80ms;">
+                    <div class="feature-card reveal delay-80">
                         <h3>🎯 High Accuracy</h3>
                         <p>89.7% accuracy on multi-class brain tumor classification with 0.9879 AUC score.</p>
                     </div>
-                    <div class="feature-card reveal" style="--delay: 140ms;">
+                    <div class="feature-card reveal delay-140">
                         <h3>🧠 Explainable AI</h3>
                         <p>Grad-CAM heatmaps show exactly where the model focuses for transparent decision-making.</p>
                     </div>
-                    <div class="feature-card reveal" style="--delay: 200ms;">
+                    <div class="feature-card reveal delay-200">
                         <h3>🏥 Multi-Class Detection</h3>
                         <p>Classifies: Glioma, Meningioma, Pituitary Tumors, and No Tumor cases.</p>
                     </div>
-                    <div class="feature-card reveal" style="--delay: 260ms;">
+                    <div class="feature-card reveal delay-260">
                         <h3>⚡ Real-Time Analysis</h3>
                         <p>Fast inference powered by MobileNetV2 transfer learning architecture.</p>
                     </div>
-                    <div class="feature-card reveal" style="--delay: 320ms;">
+                    <div class="feature-card reveal delay-320">
                         <h3>📊 Confidence Scoring</h3>
                         <p>Get probability scores for all classes to understand model confidence levels.</p>
                     </div>
-                    <div class="feature-card reveal" style="--delay: 380ms;">
+                    <div class="feature-card reveal delay-380">
                         <h3>🔒 Privacy First</h3>
                         <p>Your images are processed locally and not stored or retained.</p>
                     </div>
@@ -598,13 +70,13 @@
                         <span id="status" class="status-badge">Idle</span>
                     </div>
 
-                    <img id="preview" style="display:none;" />
-                    <img id="heatmap" style="display:none; opacity: 0.8;" />
+                    <img id="preview" class="hidden" />
+                    <img id="heatmap" class="hidden heatmap-image" />
 
                     <div id="result"></div>
 
                     <div class="button-group">
-                        <button id="heatmapBtn" style="display:none; background: linear-gradient(135deg, #00c864 0%, #64c8ff 100%);">Show Heatmap</button>
+                        <button id="heatmapBtn" class="hidden btn-secondary">Show Heatmap</button>
                     </div>
                 </div>
             </div>
@@ -613,9 +85,9 @@
         <!-- CITATIONS PAGE -->
         <section id="citations" class="page">
             <div class="citations-container">
-                <h1 class="reveal" style="margin-bottom: 30px; background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">References & Dataset Information</h1>
+                <h1 class="reveal gradient-title">References & Dataset Information</h1>
 
-                <div class="citation-section reveal" style="--delay: 80ms;">
+                <div class="citation-section reveal delay-80">
                     <h3>📊 Dataset Source</h3>
                     <div class="citation-item">
                         <p><strong>Brain Tumor MRI Dataset</strong></p>
@@ -625,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="citation-section reveal" style="--delay: 140ms;">
+                <div class="citation-section reveal delay-140">
                     <h3>🧠 Model Architecture</h3>
                     <div class="citation-item">
                         <p><strong>MobileNetV2 Transfer Learning</strong></p>
@@ -639,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="citation-section reveal" style="--delay: 200ms;">
+                <div class="citation-section reveal delay-200">
                     <h3>🛠️ Technologies Used</h3>
                     <div class="citation-item">
                         <p><strong>Backend:</strong> FastAPI, TensorFlow/Keras, Python</p>
@@ -648,7 +120,7 @@
                     </div>
                 </div>
 
-                <div class="citation-section reveal" style="--delay: 260ms;">
+                <div class="citation-section reveal delay-260">
                     <h3>⚠️ Disclaimer</h3>
                     <div class="citation-item">
                         <p><strong>Research & Educational Use Only</strong></p>
@@ -656,7 +128,7 @@
                     </div>
                 </div>
 
-                <div class="citation-section reveal" style="--delay: 320ms;">
+                <div class="citation-section reveal delay-320">
                     <h3>📝 Model Performance</h3>
                     <div class="citation-item">
                         <p><strong>Accuracy:</strong> 89.70%</p>
@@ -669,180 +141,10 @@
         </section>
     </main>
 
-    <script>
-        const API_URL = "http://127.0.0.1:8000/predict";
-        const HEATMAP_URL = "http://127.0.0.1:8000/heatmap";
-
-        const fileInput = document.getElementById("file");
-        const previewImg = document.getElementById("preview");
-        const heatmapImg = document.getElementById("heatmap");
-        const predictBtn = document.getElementById("predictBtn");
-        const heatmapBtn = document.getElementById("heatmapBtn");
-        const statusEl = document.getElementById("status");
-        const resultEl = document.getElementById("result");
-
-        let currentFile = null;
-        let heatmapShown = false;
-
-        // Page Navigation
-        function showPage(pageName) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageName).classList.add('active');
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            event.target.classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        function setStatus(text, type = 'info') {
-            statusEl.textContent = text;
-            statusEl.className = 'status-badge';
-            if (type === 'success') statusEl.classList.add('success');
-            else if (type === 'error') statusEl.classList.add('error');
-        }
-
-        function renderResult(data) {
-            const classes = data.all_predictions || {};
-            const isTumor = data.is_tumor !== false;
-            const predClass = data.predicted_display || 'Unknown';
-            const confidence = data.confidence_pct || 0;
-
-            const sorted = Object.entries(classes)
-                .sort(([,a], [,b]) => b.probability - a.probability);
-
-            const predictionCards = sorted.map(([cls, info], idx) => {
-                const isSelected = (idx === 0);
-                const pct = info.confidence_pct || 0;
-                return `
-                    <div class="prediction-card ${isSelected ? 'selected' : ''}">
-                        <div class="class-name">${info.display}</div>
-                        <div class="class-bar">
-                            <div class="class-fill" style="width: ${pct}%;"></div>
-                        </div>
-                        <div class="class-prob">${pct.toFixed(1)}%</div>
-                        <div class="class-type">${info.type}</div>
-                    </div>
-                `;
-            }).join('');
-
-            const resultHTML = `
-                <div class="main-result ${isTumor ? 'tumor' : 'normal'}">
-                    <div class="result-icon">${isTumor ? '⚠️' : '✅'}</div>
-                    <div class="result-title">${predClass}</div>
-                    <div class="result-message">
-                        ${data.message || 'Analysis complete'}
-                    </div>
-                </div>
-                <div class="result-grid">
-                    ${predictionCards}
-                </div>
-                <details>
-                    <summary>View detailed results</summary>
-                    <pre>${JSON.stringify(data, null, 2)}</pre>
-                </details>
-            `;
-            resultEl.innerHTML = resultHTML;
-        }
-
-        function renderLoading() {
-            resultEl.innerHTML = `
-                <div class="loading-container">
-                    <div class="loading-spinner"></div>
-                    <div class="loading-text">Running prediction...</div>
-                </div>
-            `;
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("in-view");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-
-        fileInput.addEventListener("change", () => {
-            const file = fileInput.files?.[0];
-            if (!file) return;
-
-            currentFile = file;
-            heatmapShown = false;
-
-            const url = URL.createObjectURL(file);
-            previewImg.src = url;
-            previewImg.style.display = "block";
-            heatmapImg.style.display = "none";
-            heatmapBtn.style.display = "none";
-
-            setStatus("Ready", 'success');
-            resultEl.innerHTML = "";
-        });
-
-        heatmapBtn.addEventListener("click", async () => {
-            if (!currentFile) return;
-
-            heatmapShown = !heatmapShown;
-
-            if (heatmapShown) {
-                try {
-                    heatmapBtn.textContent = "Loading heatmap...";
-                    heatmapBtn.disabled = true;
-
-                    const form = new FormData();
-                    form.append("file", currentFile);
-
-                    const res = await fetch(HEATMAP_URL, { method: "POST", body: form });
-                    if (!res.ok) throw new Error("Failed to generate heatmap");
-
-                    const data = await res.json();
-                    heatmapImg.src = data.heatmap;
-                    heatmapImg.style.display = "block";
-                    previewImg.style.display = "none";
-                    heatmapBtn.textContent = "Hide Heatmap";
-                    heatmapBtn.disabled = false;
-                } catch (err) {
-                    console.error(err);
-                    alert("Failed to generate heatmap: " + err.message);
-                    heatmapShown = false;
-                    heatmapBtn.textContent = "Show Heatmap";
-                    heatmapBtn.disabled = false;
-                }
-            } else {
-                heatmapImg.style.display = "none";
-                previewImg.style.display = "block";
-                heatmapBtn.textContent = "Show Heatmap";
-            }
-        });
-
-        predictBtn.addEventListener("click", async () => {
-            const file = fileInput.files?.[0];
-            if (!file) {
-                setStatus("Pick an image first", 'error');
-                return;
-            }
-
-            try {
-                setStatus("Analyzing...", 'info');
-                renderLoading();
-
-                const form = new FormData();
-                form.append("file", file);
-
-                const res = await fetch(API_URL, { method: "POST", body: form });
-                if (!res.ok) throw new Error("Prediction failed");
-
-                const data = await res.json();
-                renderResult(data);
-                heatmapBtn.style.display = "block";
-                setStatus("Complete", 'success');
-            } catch (err) {
-                console.error(err);
-                resultEl.innerHTML = `<div style="color: #ff4040; padding: 20px; background: rgba(255, 64, 64, 0.1); border-radius: 8px;">Error: ${err.message}</div>`;
-                setStatus("Error", 'error');
-            }
-        });
-    </script>
+    
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

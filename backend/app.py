@@ -30,6 +30,7 @@ def health():
 
 
 @app.post("/predict")
+@app.post("/api/predict")
 async def predict(file: UploadFile = File(...)):
     """
     Predict brain tumor class from MRI image (4 classes: glioma, meningioma, notumor, pituitary).
@@ -79,6 +80,7 @@ async def predict(file: UploadFile = File(...)):
 
 
 @app.post("/heatmap")
+@app.post("/api/heatmap")
 async def get_heatmap(file: UploadFile = File(...)):
     """
     Generate a Grad-CAM heatmap showing model attention regions.
