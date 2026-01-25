@@ -31,15 +31,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --------------------------------------------------
-# Gemini config
-# --------------------------------------------------
-GEMINI_API_KEY = CONFIG_GEMINI_API_KEY  # already validated in config.py (env-based)
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
-# --------------------------------------------------
-# Model loading (safe startup)
-# --------------------------------------------------
+# Gemini config
+GEMINI_API_KEY = CONFIG_GEMINI_API_KEY  # already validated in config.py (env-based)
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+
+
+# Model loading (safe startup)-
 model = None
 MODEL_LOAD_ERROR = None
 
@@ -50,16 +48,16 @@ def startup():
     try:
         logger.info("Loading ML model...")
         model = load_model()
-        logger.info("Model loaded successfully ✅")
+        logger.info("Model loaded successfully ")
     except Exception as e:
         MODEL_LOAD_ERROR = str(e)
-        logger.exception("Model failed to load ❌")
+        logger.exception("Model failed to load")
         # Keep app alive so /health shows the error
 
 
-# --------------------------------------------------
+
 # Global exception handler (prevents mystery 502s)
-# --------------------------------------------------
+
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request, exc: Exception):
     logger.exception("Unhandled server error")
@@ -184,19 +182,18 @@ async def get_heatmap(file: UploadFile = File(...)):
 @app.post("/api/chat")
 async def chat_with_assistant(request: ChatRequest):
     """Chat with AI assistant about brain tumor detection results."""
+
     if not GEMINI_API_KEY:
-        raise HTTPException(status_code=500, detail="GEMINI_API_KEY not set on server.")
+        return {
+            "response": "AI explanation service is not configured.",
+            "status": "degraded",
+            "error": "missing_api_key"
+        }
 
     system_prompt = (
         "You are a helpful medical AI assistant for NeuroDetect, a brain tumor detection system. "
-        "You help users understand their MRI scan analysis results. You can explain: "
-        "- What different tumor types mean (glioma, meningioma, pituitary) "
-        "- How to interpret confidence scores "
-        "- General information about brain tumors "
-        "- What the Grad-CAM heatmap shows "
-        "IMPORTANT: Always remind users that this is for educational purposes only and they should consult "
-        "a qualified medical professional for actual diagnosis and treatment decisions. "
-        "Be concise, empathetic, and helpful. If prediction context is provided, reference it in your response."
+        "You help users understand their MRI scan analysis results. "
+        "IMPORTANT: This is for educational purposes only and not a medical diagnosis."
     )
 
     user_message = request.message
@@ -204,11 +201,18 @@ async def chat_with_assistant(request: ChatRequest):
         user_message = f"{user_message}\n\nCurrent scan results: {request.context}"
 
     prompt = f"{system_prompt}\n\nUser: {user_message}"
+
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
-    headers = {"x-goog-api-key": GEMINI_API_KEY, "Content-Type": "application/json"}
+    headers = {
+        "x-goog-api-key": GEMINI_API_KEY,
+        "Content-Type": "application/json",
+    }
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 1024},
+        "generationConfig": {
+            "temperature": 0.2,
+            "maxOutputTokens": 512,  # lower to reduce quota burn
+        },
     }
 
     try:
@@ -216,10 +220,18 @@ async def chat_with_assistant(request: ChatRequest):
             resp = await client.post(url, headers=headers, json=payload, timeout=30.0)
 
         if resp.status_code != 200:
-            logger.error(f"Gemini error {resp.status_code}: {resp.text[:500]}")
-            raise HTTPException(status_code=502, detail=resp.text)
+            logger.warning(f"Gemini unavailable ({resp.status_code})")
+            return {
+                "response": (
+                    "AI explanation is temporarily unavailable. "
+                    "Your scan prediction was completed successfully."
+                ),
+                "status": "degraded",
+                "error": "ai_unavailable"
+            }
 
         data = resp.json()
+
         text = (
             data.get("candidates", [{}])[0]
             .get("content", {})
@@ -228,14 +240,26 @@ async def chat_with_assistant(request: ChatRequest):
         )
 
         if not text:
-            raise HTTPException(status_code=502, detail="Empty response from Gemini.")
+            return {
+                "response": "AI explanation is currently unavailable.",
+                "status": "degraded",
+                "error": "empty_ai_response"
+            }
 
         reply = text.strip()
-        return {"response": reply, "reply": reply, "error": None}
+        return {
+            "response": reply,
+            "status": "ok",
+            "error": None
+        }
 
-    except HTTPException:
-        raise
     except Exception as e:
-        logger.exception("Error during /chat")
-        raise HTTPException(status_code=500, detail=str(e))
-
+        logger.exception("Unexpected error during /chat")
+        return {
+            "response": (
+                "AI explanation service is currently unavailable. "
+                "Please try again later."
+            ),
+            "status": "error",
+            "error": "internal_error"
+        }
