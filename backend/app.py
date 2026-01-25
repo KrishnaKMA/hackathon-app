@@ -10,9 +10,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from config import CLASS_INFO, CLASS_NAMES, GEMINI_API_KEY as CONFIG_GEMINI_API_KEY, NUM_CLASSES
-from model_loader import load_model
-from utils import generate_heatmap_image, preprocess_image
+from .config import CLASS_INFO, CLASS_NAMES, GEMINI_API_KEY as CONFIG_GEMINI_API_KEY, NUM_CLASSES
+from .model_loader import load_model
+from .utils import generate_heatmap_image, preprocess_image
 
 # --------------------------------------------------
 # App + logging

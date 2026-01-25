@@ -2,7 +2,7 @@
 
 import logging
 import tensorflow as tf
-from config import MODEL_PATH
+from .config import MODEL_PATH
 
 logger = logging.getLogger("neurodetect")
 

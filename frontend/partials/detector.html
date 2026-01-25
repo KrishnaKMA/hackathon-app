@@ -1,0 +1,88 @@
+<!-- DETECTOR PAGE -->
+        <section id="detector" class="page">
+            <div class="detector-container">
+                <div class="detector-layout">
+                    <aside class="detector-sidebar">
+                        <div class="detector-card stat-card reveal">
+                            <div class="stat-grid">
+                                <div class="stat-item">
+                                    <div class="stat-value">4</div>
+                                    <div class="stat-label">Classes</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">89.7%</div>
+                                    <div class="stat-label">Accuracy</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">0.9879</div>
+                                    <div class="stat-label">AUC</div>
+                                </div>
+                            </div>
+                            <div class="chip-row">
+                                <span class="chip">Glioma</span>
+                                <span class="chip">Meningioma</span>
+                                <span class="chip">Pituitary</span>
+                                <span class="chip">No Tumor</span>
+                            </div>
+                        </div>
+
+                        <div class="detector-card tips-card reveal delay-80">
+                            <h3>Quick Tips</h3>
+                            <ul>
+                                <li>Use clear MRI slices (JPG or PNG).</li>
+                                <li>Review confidence scores before sharing.</li>
+                                <li>Use the heatmap to see focus areas.</li>
+                            </ul>
+                        </div>
+
+                        <div class="detector-card chat-card reveal delay-140">
+                            <div class="chat-header">
+                                <div>
+                                    <div class="chat-title">Ask about your results</div>
+                                    <div class="chat-subtitle">Education-only guidance from the assistant.</div>
+                                </div>
+                                <button class="chat-send" id="detectorChatSendBtn" type="button">Send</button>
+                            </div>
+                            <div class="chat-messages" id="detectorChatMessages">
+                                <div class="chat-message assistant">Hi! Ask me about tumor types, confidence scores, or the heatmap.</div>
+                            </div>
+                            <div class="chat-input-row">
+                                <input id="detectorChatInput" type="text" placeholder="Ask about your results..." autocomplete="off" />
+                            </div>
+                        </div>
+                    </aside>
+
+                    <div class="detector-main">
+                        <div class="detector-card reveal">
+                            <h2>Brain Tumor Analysis</h2>
+                            <div class="input-section">
+                                <input type="file" id="file" accept="image/*">
+                                <button id="predictBtn">Predict</button>
+                                <span id="status" class="status-badge">Idle</span>
+                            </div>
+                            <div class="preview-header">
+                                <div class="preview-title">Preview &amp; Results</div>
+                                <button id="heatmapBtn" class="btn-secondary heatmap-btn hidden" type="button">Show Heatmap</button>
+                            </div>
+                            <div class="preview-grid">
+                                <div class="media-frame">
+                                    <img id="preview" class="hidden" />
+                                    <img id="heatmap" class="hidden heatmap-image" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <aside class="detector-raw reveal delay-200">
+                        <div class="detector-card raw-card">
+                            <div class="raw-title">Raw Output</div>
+                            <pre id="rawOutput" class="raw-output">{ }</pre>
+                        </div>
+                        <div id="result" class="detector-card result-placeholder result-card">Upload an MRI scan to generate results.</div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        

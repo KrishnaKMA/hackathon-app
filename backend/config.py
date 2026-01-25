@@ -22,12 +22,6 @@ API_PORT = int(os.getenv("API_PORT", "8000"))
 # Gemini API configuration (FROM ENV)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-if not GEMINI_API_KEY:
-    raise RuntimeError(
-        "GEMINI_API_KEY is not set. "
-        "Add it to Render Environment Variables."
-    )
-
 # Class display information
 CLASS_INFO = {
     "glioma": {

@@ -1,0 +1,41 @@
+
+    </main>
+
+    <div class="assistant-widget">
+        <button class="assistant-fab" id="assistantToggle" aria-expanded="false" aria-controls="assistantPanel" title="Ask NeuroDetect">
+            ?
+        </button>
+        <div class="assistant-panel" id="assistantPanel" aria-hidden="true">
+            <div class="assistant-panel-header">
+                <div>
+                    <div class="assistant-panel-title">Ask NeuroDetect</div>
+                    <div class="assistant-panel-subtitle">Education-only AI help.</div>
+                </div>
+                <button class="assistant-close" id="assistantClose" aria-label="Close assistant">&times;</button>
+            </div>
+            <div class="assistant-panel-body">
+                <div class="assistant-messages" id="assistantMessages">
+                    <div class="assistant-message assistant">Hi! I can explain the app, tumor types, and how to read results.</div>
+                </div>
+                <form class="assistant-form" id="assistantForm">
+                    <input id="assistantInput" type="text" placeholder="Ask about brain tumors or how this works..." autocomplete="off" />
+                    <button id="assistantSend" type="submit">Send</button>
+                </form>
+                <div class="assistant-status" id="assistantStatus">Powered by Gemini (server-side).</div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/pages/navigation.js"></script>
+    <script src="js/pages/home.js"></script>
+    <script src="js/pages/detector.js"></script>
+    <script src="js/pages/learn.js"></script>
+    <script src="js/pages/citations.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

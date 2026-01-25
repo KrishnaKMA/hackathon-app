@@ -1,0 +1,245 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Sora", "Space Grotesk", sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 0 32px;
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.04em;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin-bottom: 0;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            color: #b0b0b0;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        nav a:hover, nav a.active {
+            color: #64c8ff;
+            text-shadow: 0 0 12px rgba(100, 200, 255, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            margin-left: 0;
+            padding: 120px 40px 60px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 2;
+        }
+
+        body[data-page="home"] main {
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition-delay: var(--delay, 0ms);
+        }
+
+        .js .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+
+        .js .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .features.carousel {
+                height: auto;
+                overflow: visible;
+                perspective: none;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .features.carousel .feature-card {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                transform: none;
+                opacity: 1;
+                filter: none;
+                text-align: center;
+            }
+        }
+
+        .delay-80 { --delay: 80ms; }
+        .delay-140 { --delay: 140ms; }
+        .delay-200 { --delay: 200ms; }
+        .delay-260 { --delay: 260ms; }
+        .delay-320 { --delay: 320ms; }
+        .delay-380 { --delay: 380ms; }
+        .delay-420 { --delay: 420ms; }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .particle-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.85;
+            background-image:
+                radial-gradient(2.5px 2.5px at 12% 24%, rgba(255, 140, 225, 0.78) 0%, transparent 60%),
+                radial-gradient(2px 2px at 76% 18%, rgba(130, 190, 255, 0.72) 0%, transparent 60%),
+                radial-gradient(2px 2px at 58% 72%, rgba(190, 150, 255, 0.66) 0%, transparent 60%),
+                radial-gradient(2px 2px at 34% 81%, rgba(140, 230, 255, 0.62) 0%, transparent 60%),
+                radial-gradient(2.5px 2.5px at 68% 52%, rgba(255, 160, 235, 0.72) 0%, transparent 60%),
+                radial-gradient(2px 2px at 8% 68%, rgba(170, 130, 255, 0.58) 0%, transparent 60%),
+                radial-gradient(2.5px 2.5px at 90% 62%, rgba(120, 210, 255, 0.62) 0%, transparent 60%);
+            background-size: 220px 240px, 320px 300px, 280px 340px, 360px 260px, 300px 320px, 260px 280px, 340px 360px;
+            background-position: 0 0, 70px 90px, 140px 30px, 20px 150px, 170px 120px, 40px 180px, 210px 70px;
+            filter: drop-shadow(0 0 8px rgba(190, 130, 255, 0.35));
+            mix-blend-mode: screen;
+            animation: particle-drift 18s linear infinite;
+        }
+
+        .particle-layer::before,
+        .particle-layer::after {
+            content: "";
+            position: absolute;
+            inset: -10% -10%;
+            background-image:
+                radial-gradient(2.5px 2.5px at 18% 22%, rgba(130, 190, 255, 0.72) 0%, transparent 60%),
+                radial-gradient(2.5px 2.5px at 62% 14%, rgba(255, 130, 220, 0.76) 0%, transparent 60%),
+                radial-gradient(2px 2px at 42% 58%, rgba(175, 140, 255, 0.66) 0%, transparent 60%),
+                radial-gradient(2px 2px at 82% 74%, rgba(140, 230, 255, 0.62) 0%, transparent 60%),
+                radial-gradient(2.5px 2.5px at 32% 88%, rgba(255, 160, 235, 0.66) 0%, transparent 60%),
+                radial-gradient(2px 2px at 6% 48%, rgba(160, 140, 255, 0.6) 0%, transparent 60%),
+                radial-gradient(2.5px 2.5px at 92% 40%, rgba(120, 210, 255, 0.62) 0%, transparent 60%);
+            background-size: 250px 260px, 330px 320px, 310px 300px, 380px 360px, 320px 340px, 280px 260px, 360px 340px;
+            background-position: 50px 30px, 150px 70px, 90px 170px, 0 130px, 210px 40px, 20px 200px, 240px 90px;
+            animation: particle-drift 24s linear infinite;
+        }
+
+        .particle-layer::after {
+            opacity: 0.6;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+
+        @keyframes particle-drift {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            50% {
+                transform: translate3d(-20px, 12px, 0);
+            }
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .particle-layer,
+            .particle-layer::before,
+            .particle-layer::after {
+                animation: none;
+            }
+        }
