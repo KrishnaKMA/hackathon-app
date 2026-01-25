@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="styles.css">
 
 </head>
-<body>
+<body data-page="home">
+    <div class="particle-layer" aria-hidden="true"></div>
     <nav>
         <div class="logo">
             NeuroDetect
@@ -37,18 +38,18 @@
                     <div class="brain-hint">Move your cursor</div>
                 </div>
 
-                <p>Advanced AI-Powered Brain Tumor Detection System</p>
-                <p class="hero-subtitle">Utilizing Deep Learning and Explainable AI to assist in medical imaging analysis</p>
-                <button class="cta-button" onclick="showPage('detector', event)">Start Analysis →</button>
-
                 <div class="about-card reveal delay-80">
                     <h2>What is NeuroDetect?</h2>
                     <p>NeuroDetect is an educational, AI-powered brain tumor detection demo that analyzes MRI images and highlights regions the model focuses on. It’s designed to help users understand how machine learning can support medical imaging workflows.</p>
-                    <p>Brain tumors can affect people of any age and impact patients, families, and care teams. Early review and accurate interpretation matter, which is why tools that provide fast, consistent insights can be valuable alongside clinical expertise.</p>
+                    <p>The model behind NeuroDetect was trained on 7,000+ labeled MRI scans across multiple tumor categories, enabling it to learn patterns that are difficult to spot at a glance. In testing, it achieved strong performance (about 89.7% accuracy with a 0.9879 AUC), which demonstrates how deep learning can provide fast, consistent second‑look insights.</p>
+                    <p>Brain tumors can affect people of any age and impact patients, families, and care teams worldwide. AI tools like NeuroDetect can help scale access to early review and triage support, especially in regions with limited specialists, by surfacing patterns quickly and consistently for clinicians to verify.</p>
                     <p>This experience is for learning and research only—not medical advice. Always consult qualified healthcare professionals for diagnosis and treatment decisions.</p>
+                    <div class="about-cta">
+                        <button class="cta-button" onclick="showPage('detector', event)">Start Analysis →</button>
+                    </div>
                 </div>
 
-                <div class="features carousel reveal">
+                <div class="features reveal">
                     <div class="feature-card">
                         <h3>🎯 High Accuracy</h3>
                         <p>89.7% accuracy on multi-class brain tumor classification with 0.9879 AUC score.</p>
@@ -74,41 +75,189 @@
                         <p>Your images are processed securely and not stored or retained.</p>
                     </div>
                 </div>
-                <div class="carousel-dots" id="featureDots" aria-label="Feature carousel navigation"></div>
+                <div class="tech-carousel reveal">
+                    <div class="tech-carousel-title">Built with</div>
+                    <div class="tech-carousel-track" aria-label="Technology stack logos">
+                        <div class="tech-carousel-group">
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python logo" />
+                                <span>Python</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI logo" />
+                                <span>FastAPI</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow logo" />
+                                <span>TensorFlow</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg" alt="Keras logo" />
+                                <span>Keras</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy logo" />
+                                <span>NumPy</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 logo" />
+                                <span>HTML5</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 logo" />
+                                <span>CSS3</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript logo" />
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="tech-item badge">
+                                <span>Uvicorn</span>
+                            </div>
+                            <div class="tech-item badge">
+                                <span>Gunicorn</span>
+                            </div>
+                            <div class="tech-item badge">
+                                <span>SciPy</span>
+                            </div>
+                            <div class="tech-item badge">
+                                <span>Pillow</span>
+                            </div>
+                        </div>
+                        <div class="tech-carousel-group" aria-hidden="true">
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" />
+                                <span>Python</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="" />
+                                <span>FastAPI</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="" />
+                                <span>TensorFlow</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg" alt="" />
+                                <span>Keras</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="" />
+                                <span>NumPy</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="" />
+                                <span>HTML5</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="" />
+                                <span>CSS3</span>
+                            </div>
+                            <div class="tech-item">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="" />
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="tech-item badge">
+                                <span>Uvicorn</span>
+                            </div>
+                            <div class="tech-item badge">
+                                <span>Gunicorn</span>
+                            </div>
+                            <div class="tech-item badge">
+                                <span>SciPy</span>
+                            </div>
+                            <div class="tech-item badge">
+                                <span>Pillow</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- DETECTOR PAGE -->
         <section id="detector" class="page">
             <div class="detector-container">
-                <div class="detector-card reveal">
-                    <h2>Brain Tumor Analysis</h2>
-                    
-                    <div class="input-section">
-                        <input type="file" id="file" accept="image/*">
-                        <button id="predictBtn">Predict</button>
-                        <span id="status" class="status-badge">Idle</span>
-                    </div>
-
-                    <img id="preview" class="hidden" />
-                    <img id="heatmap" class="hidden heatmap-image" />
-
-                    <div id="result"></div>
-
-                    <div class="button-group">
-                        <button id="heatmapBtn" class="hidden btn-secondary">Show Heatmap</button>
-                    </div>
-
-                    <!-- AI Assistant Chat -->
-                    <div class="assistant-section">
-                        <h3>🤖 AI Assistant</h3>
-                        <p class="assistant-hint">Ask questions about your scan results</p>
-                        <div id="detectorChatMessages" class="chat-messages"></div>
-                        <div class="chat-input-container">
-                            <input type="text" id="detectorChatInput" placeholder="Ask about your results..." />
-                            <button id="detectorChatSendBtn">Send</button>
+                <div class="detector-layout">
+                    <aside class="detector-sidebar">
+                        <div class="detector-card stat-card reveal">
+                            <div class="stat-grid">
+                                <div class="stat-item">
+                                    <div class="stat-value">4</div>
+                                    <div class="stat-label">Classes</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">89.7%</div>
+                                    <div class="stat-label">Accuracy</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">0.9879</div>
+                                    <div class="stat-label">AUC</div>
+                                </div>
+                            </div>
+                            <div class="chip-row">
+                                <span class="chip">Glioma</span>
+                                <span class="chip">Meningioma</span>
+                                <span class="chip">Pituitary</span>
+                                <span class="chip">No Tumor</span>
+                            </div>
                         </div>
+
+                        <div class="detector-card tips-card reveal delay-80">
+                            <h3>Quick Tips</h3>
+                            <ul>
+                                <li>Use clear MRI slices (JPG or PNG).</li>
+                                <li>Review confidence scores before sharing.</li>
+                                <li>Use the heatmap to see focus areas.</li>
+                            </ul>
+                        </div>
+
+                        <div class="detector-card chat-card reveal delay-140">
+                            <div class="chat-header">
+                                <div>
+                                    <div class="chat-title">Ask about your results</div>
+                                    <div class="chat-subtitle">Education-only guidance from the assistant.</div>
+                                </div>
+                                <button class="chat-send" id="detectorChatSendBtn" type="button">Send</button>
+                            </div>
+                            <div class="chat-messages" id="detectorChatMessages">
+                                <div class="chat-message assistant">Hi! Ask me about tumor types, confidence scores, or the heatmap.</div>
+                            </div>
+                            <div class="chat-input-row">
+                                <input id="detectorChatInput" type="text" placeholder="Ask about your results..." autocomplete="off" />
+                            </div>
+                        </div>
+                    </aside>
+
+                    <div class="detector-main">
+                        <div class="detector-card reveal">
+                            <h2>Brain Tumor Analysis</h2>
+                            <div class="input-section">
+                                <input type="file" id="file" accept="image/*">
+                                <button id="predictBtn">Predict</button>
+                                <span id="status" class="status-badge">Idle</span>
+                            </div>
+                            <div class="preview-header">
+                                <div class="preview-title">Preview &amp; Results</div>
+                                <button id="heatmapBtn" class="btn-secondary heatmap-btn hidden" type="button">Show Heatmap</button>
+                            </div>
+                            <div class="preview-grid">
+                                <div class="media-frame">
+                                    <img id="preview" class="hidden" />
+                                    <img id="heatmap" class="hidden heatmap-image" />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
+                    <aside class="detector-raw reveal delay-200">
+                        <div class="detector-card raw-card">
+                            <div class="raw-title">Raw Output</div>
+                            <pre id="rawOutput" class="raw-output">{ }</pre>
+                        </div>
+                        <div id="result" class="detector-card result-placeholder result-card">Upload an MRI scan to generate results.</div>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -116,49 +265,68 @@
         <!-- LEARN PAGE -->
         <section id="learn" class="page">
             <div class="learn-container">
-                <h1 class="reveal gradient-title">Learn About Brain Tumors</h1>
-                <p class="learn-intro reveal">A quick, evidence-based overview of brain tumor burden, common types, and how AI can support clinical workflows. This section is for education only and does not replace medical advice.</p>
-
+                <h1 class="reveal gradient-title">Learn</h1>
+                <p class="learn-intro">Curated research and clinical resources to explore brain tumors, classification, treatment, and outcomes. Educational use only.</p>
                 <div class="learn-grid">
-                    <div class="learn-card reveal delay-80">
-                        <h3>📊 U.S. malignant brain & spinal cord tumors (2026)</h3>
-                        <ul>
-                            <li>~24,740 new cases</li>
-                            <li>~18,350 deaths</li>
-                            <li>~1% of all new U.S. cancers</li>
-                        </ul>
-                        <p class="learn-source"><a href="https://www.cancer.org/cancer/types/brain-spinal-cord-tumors-adults/about/key-statistics.html" target="_blank">American Cancer Society (Key Statistics)</a></p>
-                    </div>
+                    <article class="learn-card reveal delay-80">
+                        <div class="learn-media" style="background-image: url('assets/learn/incidence.jpg');"></div>
+                        <div class="learn-body">
+                            <div class="learn-tag">NCI PDQ</div>
+                            <h3>Incidence &amp; mortality snapshot</h3>
+                            <p>Official PDQ summary with U.S. and global incidence/mortality estimates and SEER-based rates.</p>
+                            <a class="learn-link" href="https://www.cancer.gov/types/brain/hp/adult-brain-treatment-pdq" target="_blank" rel="noopener">Read source</a>
+                        </div>
+                    </article>
 
-                    <div class="learn-card reveal delay-140">
-                        <h3>🌍 Global & U.S. incidence (latest NCI PDQ)</h3>
-                        <ul>
-                            <li>2022 worldwide: ~321,476 new cases; ~248,305 deaths</li>
-                            <li>2025 U.S.: ~24,820 new cases; ~18,330 deaths</li>
-                            <li>U.S. incidence: 6.2 per 100,000; mortality: 4.4 per 100,000</li>
-                        </ul>
-                        <p class="learn-source"><a href="https://www.cancer.gov/types/brain/hp/adult-brain-treatment-pdq" target="_blank">NCI PDQ – CNS Tumors (Incidence & Mortality)</a></p>
-                    </div>
+                    <article class="learn-card reveal delay-140">
+                        <div class="learn-media" style="background-image: url('assets/learn/cbtrus.jpg');"></div>
+                        <div class="learn-body">
+                            <div class="learn-tag">CBTRUS</div>
+                            <h3>Population-level tumor statistics</h3>
+                            <p>The CBTRUS report aggregates U.S. registry data and details tumor histologies and incidence patterns.</p>
+                            <a class="learn-link" href="https://pubmed.ncbi.nlm.nih.gov/41092086/" target="_blank" rel="noopener">Read source</a>
+                        </div>
+                    </article>
 
-                    <div class="learn-card reveal delay-200">
-                        <h3>🧬 Common tumor types (CBTRUS)</h3>
-                        <ul>
-                            <li>Gliomas: 22.2% of all tumors</li>
-                            <li>Glioblastoma: 52.2% of malignant tumors</li>
-                            <li>Meningioma: 57.4% of non-malignant tumors</li>
-                        </ul>
-                        <p class="learn-source"><a href="https://pubmed.ncbi.nlm.nih.gov/41092086/" target="_blank">CBTRUS Statistical Report (2018–2022)</a></p>
-                    </div>
+                    <article class="learn-card reveal delay-200">
+                        <div class="learn-media" style="background-image: url('assets/learn/who.jpg');"></div>
+                        <div class="learn-body">
+                            <div class="learn-tag">WHO 2021</div>
+                            <h3>Modern CNS tumor classification</h3>
+                            <p>WHO’s 5th edition integrates molecular diagnostics to refine CNS tumor families and types.</p>
+                            <a class="learn-link" href="https://pubmed.ncbi.nlm.nih.gov/35218102/" target="_blank" rel="noopener">Read source</a>
+                        </div>
+                    </article>
 
-                    <div class="learn-card reveal delay-260">
-                        <h3>🤖 Why NeuroDetect helps</h3>
-                        <ul>
-                            <li>Fast triage with multi-class tumor type predictions</li>
-                            <li>Explainability via heatmaps to build trust</li>
-                            <li>Consistent outputs to support clinical review</li>
-                        </ul>
-                        <p class="learn-note">Use results alongside professional medical evaluation.</p>
-                    </div>
+                    <article class="learn-card reveal delay-260">
+                        <div class="learn-media" style="background-image: url('assets/learn/treatment.jpg');"></div>
+                        <div class="learn-body">
+                            <div class="learn-tag">Mayo Clinic</div>
+                            <h3>Diagnosis &amp; treatment options</h3>
+                            <p>Overview of surgery, radiation, chemotherapy, targeted therapy, and care planning.</p>
+                            <a class="learn-link" href="https://www.mayoclinic.org/diseases-conditions/brain-tumor/diagnosis-treatment/drc-20350088" target="_blank" rel="noopener">Read source</a>
+                        </div>
+                    </article>
+
+                    <article class="learn-card reveal delay-320">
+                        <div class="learn-media" style="background-image: url('assets/learn/stats.jpg');"></div>
+                        <div class="learn-body">
+                            <div class="learn-tag">ACS</div>
+                            <h3>Key statistics &amp; risk context</h3>
+                            <p>Annual U.S. estimates and high‑level context about how common brain tumors are.</p>
+                            <a class="learn-link" href="https://www.cancer.org/cancer/types/brain-spinal-cord-tumors-adults/key-statistics.html" target="_blank" rel="noopener">Read source</a>
+                        </div>
+                    </article>
+
+                    <article class="learn-card reveal delay-380">
+                        <div class="learn-media" style="background-image: url('assets/learn/survival.jpg');"></div>
+                        <div class="learn-body">
+                            <div class="learn-tag">ACS</div>
+                            <h3>Survival rates &amp; prognosis</h3>
+                            <p>How 5‑year relative survival rates vary by tumor type and age group.</p>
+                            <a class="learn-link" href="https://www.cancer.org/cancer/types/brain-spinal-cord-tumors-adults/detection-diagnosis-staging/survival-rates.html" target="_blank" rel="noopener">Read source</a>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -210,6 +378,18 @@
                 </div>
 
                 <div class="citation-section reveal delay-320">
+                    <h3>📚 Research &amp; Clinical Sources</h3>
+                    <div class="citation-item">
+                        <p><a href="https://www.cancer.gov/types/brain/hp/adult-brain-treatment-pdq" target="_blank" rel="noopener">NCI PDQ — Adult Central Nervous System Tumors (Incidence &amp; Mortality)</a></p>
+                        <p><a href="https://pubmed.ncbi.nlm.nih.gov/41092086/" target="_blank" rel="noopener">CBTRUS Statistical Report (2018–2022)</a></p>
+                        <p><a href="https://pubmed.ncbi.nlm.nih.gov/35218102/" target="_blank" rel="noopener">WHO Classification of Tumors of the CNS (2021) — Summary</a></p>
+                        <p><a href="https://www.mayoclinic.org/diseases-conditions/brain-tumor/diagnosis-treatment/drc-20350088" target="_blank" rel="noopener">Mayo Clinic — Brain Tumor Diagnosis &amp; Treatment</a></p>
+                        <p><a href="https://www.cancer.org/cancer/types/brain-spinal-cord-tumors-adults/key-statistics.html" target="_blank" rel="noopener">American Cancer Society — Key Statistics</a></p>
+                        <p><a href="https://www.cancer.org/cancer/types/brain-spinal-cord-tumors-adults/detection-diagnosis-staging/survival-rates.html" target="_blank" rel="noopener">American Cancer Society — Survival Rates</a></p>
+                    </div>
+                </div>
+
+                <div class="citation-section reveal delay-380">
                     <h3>📝 Model Performance</h3>
                     <div class="citation-item">
                         <p><strong>Accuracy:</strong> 89.70%</p>
@@ -219,18 +399,10 @@
                     </div>
                 </div>
 
-                                <div class="citation-section reveal delay-420">
+                <div class="citation-section reveal delay-420">
                     <h3>🧠 3D Brain Model</h3>
                     <div class="citation-item">
-                        <p><a href="https://codepen.io/prisoner849/pen/RwjQaeO" target="_blank">CodePen — SYNAPSES by prisoner849</a></p>
-                    </div>
-                </div>
-<div class="citation-section reveal delay-380">
-                    <h3>📚 Education Sources</h3>
-                    <div class="citation-item">
-                        <p><a href="https://www.cancer.org/cancer/types/brain-spinal-cord-tumors-adults/about/key-statistics.html" target="_blank">American Cancer Society — Brain & Spinal Cord Tumors (Adults)</a></p>
-                        <p><a href="https://www.cancer.gov/types/brain/hp/adult-brain-treatment-pdq" target="_blank">NCI PDQ — Adult Central Nervous System Tumors</a></p>
-                        <p><a href="https://pubmed.ncbi.nlm.nih.gov/41092086/" target="_blank">CBTRUS Statistical Report (2018–2022)</a></p>
+                        <p><a href="https://codepen.io/prisoner849/pen/RwjQaeO" target="_blank" rel="noopener">CodePen — SYNAPSES by prisoner849</a></p>
                     </div>
                 </div>
             </div>

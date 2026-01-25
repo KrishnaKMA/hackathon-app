@@ -3,7 +3,9 @@ window.AppModules = window.AppModules || {};
 window.AppModules.api = (() => {
   const isLocalhost =
     window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1";
+    window.location.hostname === "127.0.0.1" ||
+    window.location.hostname === "" ||
+    window.location.protocol === "file:";
 
   const API_BASE = isLocalhost ? "http://127.0.0.1:8000" : "/api";
 

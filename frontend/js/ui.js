@@ -50,11 +50,12 @@ window.AppModules.ui = (() => {
       <div class="result-grid">
         ${predictionCards}
       </div>
-      <details>
-        <summary>View detailed results</summary>
-        <pre>${JSON.stringify(data, null, 2)}</pre>
-      </details>
     `;
+
+    const rawOutput = document.getElementById("rawOutput");
+    if (rawOutput) {
+      rawOutput.textContent = JSON.stringify(data, null, 2);
+    }
   }
 
   function renderLoading(resultEl) {
@@ -65,6 +66,8 @@ window.AppModules.ui = (() => {
         <div class="loading-text">Running prediction...</div>
       </div>
     `;
+    const rawOutput = document.getElementById("rawOutput");
+    if (rawOutput) rawOutput.textContent = "{ }";
   }
 
   function showError(resultEl, message) {
@@ -75,6 +78,8 @@ window.AppModules.ui = (() => {
         <div class="error-message">${message}</div>
       </div>
     `;
+    const rawOutput = document.getElementById("rawOutput");
+    if (rawOutput) rawOutput.textContent = "{ }";
   }
 
   function setPreviewImage(previewImg, url) {

@@ -49,7 +49,7 @@
       const url = URL.createObjectURL(file);
       ui.setPreviewImage(previewImg, url);
       ui.setStatus(statusEl, "Ready", "success");
-      if (resultEl) resultEl.innerHTML = "";
+      if (resultEl) resultEl.textContent = "Upload an MRI scan to generate results.";
     });
   }
 
@@ -160,101 +160,7 @@
     });
   }
 
-  function initFeatureCarousel() {
-    const field = document.querySelector(".features.carousel");
-    if (!field) return;
-
-    const cards = Array.from(field.querySelectorAll(".feature-card"));
-    if (cards.length < 2) return;
-
-    const dotsContainer = document.getElementById("featureDots");
-    let dots = [];
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const smallScreen = window.matchMedia("(max-width: 900px)");
-    if (reduceMotion.matches || smallScreen.matches) return;
-
-    const total = cards.length;
-    let activeIndex = Math.floor(total / 2);
-    let lastWheel = 0;
-
-    const wrapIndex = (idx) => (idx + total) % total;
-
-    let rafId = null;
-    const render = () => {
-      const half = Math.floor(total / 2);
-      cards.forEach((card, idx) => {
-        let offset = idx - activeIndex;
-        if (offset > half) offset -= total;
-        if (offset < -half) offset += total;
-        const abs = Math.abs(offset);
-        const x = offset * 220;
-        const y = abs * 18;
-        const scale = 1 - Math.min(abs * 0.1, 0.34);
-        const opacity = 1 - abs * 0.22;
-        const z = 10 - abs;
-
-        card.style.setProperty("--x", `${x}px`);
-        card.style.setProperty("--y", `${y}px`);
-        card.style.setProperty("--scale", scale);
-        card.style.setProperty("--opacity", Math.max(opacity, 0.55));
-        card.style.setProperty("--z", z);
-        card.classList.toggle("active", idx === activeIndex);
-      });
-
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle("active", idx === activeIndex);
-      });
-    };
-
-    const scheduleRender = () => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(() => {
-        rafId = null;
-        render();
-      });
-    };
-
-    const setActive = (idx) => {
-      activeIndex = wrapIndex(idx);
-      scheduleRender();
-    };
-
-    dots = dotsContainer
-      ? cards.map((_, idx) => {
-          const dot = document.createElement("button");
-          dot.type = "button";
-          dot.className = "carousel-dot";
-          dot.setAttribute("aria-label", `Show card ${idx + 1}`);
-          dot.addEventListener("click", () => setActive(idx));
-          dotsContainer.appendChild(dot);
-          return dot;
-        })
-      : [];
-
-    cards.forEach((card, idx) => {
-      card.addEventListener("click", () => setActive(idx));
-    });
-
-    field.addEventListener(
-      "wheel",
-      (event) => {
-        const goingDown = event.deltaY > 0;
-        const now = Date.now();
-        if (now - lastWheel < 180) return;
-        lastWheel = now;
-
-        event.preventDefault();
-        setActive(activeIndex + (goingDown ? 1 : -1));
-      },
-      { passive: false }
-    );
-
-    render();
-  }
-
   animations.initScrollReveal();
-  initFeatureCarousel();
 
   const synapsesFrame = document.querySelector(".synapses-frame iframe");
   if (synapsesFrame) {

@@ -1,7 +1,7 @@
 """Model loading and management."""
 
 import tensorflow as tf
-from config import MODEL_PATH
+from .config import MODEL_PATH
 
 
 def load_model():

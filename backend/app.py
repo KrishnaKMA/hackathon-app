@@ -7,9 +7,9 @@ from pydantic import BaseModel
 import numpy as np
 import httpx
 
-from config import CLASS_NAMES, CLASS_INFO, NUM_CLASSES, GEMINI_API_KEY as CONFIG_GEMINI_API_KEY
-from model_loader import load_model
-from utils import preprocess_image, generate_heatmap_image
+from .config import CLASS_NAMES, CLASS_INFO, NUM_CLASSES, GEMINI_API_KEY as CONFIG_GEMINI_API_KEY
+from .model_loader import load_model
+from .utils import preprocess_image, generate_heatmap_image
 
 app = FastAPI()
 
