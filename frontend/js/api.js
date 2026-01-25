@@ -9,7 +9,7 @@ window.AppModules.api = (() => {
 
   const API_BASE = isLocalhost 
     ? "http://127.0.0.1:8000" 
-    : "https://hackathon-app-88w3.onrender.com";
+    : "";  // Use relative paths when served by same origin
 
   async function postFile(path, file) {
     const form = new FormData();

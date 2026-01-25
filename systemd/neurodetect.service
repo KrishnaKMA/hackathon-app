@@ -1,0 +1,23 @@
+[Unit]
+Description=NeuroDetect Brain Tumor Detection API
+After=network.target
+
+[Service]
+Type=notify
+User=neurodetect
+Group=neurodetect
+WorkingDirectory=/home/neurodetect/app/backend
+Environment="PATH=/home/neurodetect/app/venv/bin"
+EnvironmentFile=/home/neurodetect/app/.env
+ExecStart=/home/neurodetect/app/venv/bin/gunicorn app:app \
+    --workers 2 \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --bind 127.0.0.1:8000 \
+    --timeout 120 \
+    --access-logfile - \
+    --error-logfile -
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
