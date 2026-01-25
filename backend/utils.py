@@ -5,7 +5,7 @@ import tensorflow as tf
 from PIL import Image
 import io
 import base64
-from .config import IMG_SIZE
+from config import IMG_SIZE
 
 
 def preprocess_image(img_bytes):
