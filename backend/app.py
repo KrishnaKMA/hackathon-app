@@ -18,11 +18,11 @@ class ChatRequest(BaseModel):
     message: str
     context: dict | None = None
 
-# allow frontend (we'll tighten later)
+# allow frontend cross-origin requests
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
