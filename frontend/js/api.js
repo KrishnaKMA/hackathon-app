@@ -19,6 +19,19 @@ window.AppModules.api = (() => {
     return res.json();
   }
 
+  async function postJson(path, data) {
+    const res = await fetch(`${API_BASE}${path}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error("Server error (" + res.status + "): " + text);
+    }
+    return res.json();
+  }
+
   async function predict(file) {
     return postFile("/predict", file);
   }
@@ -27,5 +40,9 @@ window.AppModules.api = (() => {
     return postFile("/heatmap", file);
   }
 
-  return { predict, heatmap };
+  async function chat(message, context = null) {
+    return postJson("/chat", { message, context });
+  }
+
+  return { predict, heatmap, chat };
 })();

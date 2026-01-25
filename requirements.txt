@@ -6,3 +6,4 @@ tensorflow
 pillow
 scipy
 python-multipart
+httpx

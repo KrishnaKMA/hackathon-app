@@ -10,9 +10,13 @@
   const heatmapBtn = document.getElementById("heatmapBtn");
   const statusEl = document.getElementById("status");
   const resultEl = document.getElementById("result");
+  const chatInput = document.getElementById("chatInput");
+  const chatSendBtn = document.getElementById("chatSendBtn");
+  const chatMessages = document.getElementById("chatMessages");
 
   let currentFile = null;
   let heatmapShown = false;
+  let lastPrediction = null;
 
   window.showPage = (pageName, evt) => {
     document.querySelectorAll(".page").forEach((p) => p.classList.remove("active"));
@@ -84,6 +88,7 @@
         ui.renderLoading(resultEl);
 
         const data = await api.predict(file);
+        lastPrediction = data;
         ui.renderResult(resultEl, data);
         ui.setHeatmapButton(heatmapBtn, { visible: true, text: "Show Heatmap", disabled: false });
         heatmapShown = false;
@@ -93,6 +98,61 @@
         ui.setStatus(statusEl, "Error", "error");
         ui.setHeatmapButton(heatmapBtn, { visible: false, text: "Show Heatmap", disabled: false });
         ui.showError(resultEl, String(err?.message ?? err));
+      }
+    });
+  }
+
+  // Chat functionality
+  function addChatMessage(text, type) {
+    if (!chatMessages) return;
+    const msgEl = document.createElement("div");
+    msgEl.className = `chat-message ${type}`;
+    msgEl.textContent = text;
+    chatMessages.appendChild(msgEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return msgEl;
+  }
+
+  async function sendChatMessage() {
+    if (!chatInput || !chatInput.value.trim()) return;
+    
+    const message = chatInput.value.trim();
+    chatInput.value = "";
+    
+    addChatMessage(message, "user");
+    const loadingMsg = addChatMessage("Thinking...", "loading");
+    
+    try {
+      const context = lastPrediction ? {
+        predicted_class: lastPrediction.predicted_display,
+        confidence: lastPrediction.confidence_pct,
+        is_tumor: lastPrediction.is_tumor,
+        all_predictions: lastPrediction.all_predictions
+      } : null;
+      
+      const data = await api.chat(message, context);
+      
+      if (loadingMsg) loadingMsg.remove();
+      
+      if (data.error) {
+        addChatMessage(data.error, "error");
+      } else {
+        addChatMessage(data.response, "assistant");
+      }
+    } catch (err) {
+      if (loadingMsg) loadingMsg.remove();
+      addChatMessage(`Error: ${err?.message ?? err}`, "error");
+    }
+  }
+
+  if (chatSendBtn) {
+    chatSendBtn.addEventListener("click", sendChatMessage);
+  }
+
+  if (chatInput) {
+    chatInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        sendChatMessage();
       }
     });
   }

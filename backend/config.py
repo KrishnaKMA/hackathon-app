@@ -13,6 +13,9 @@ NUM_CLASSES = len(CLASS_NAMES)
 API_HOST = "127.0.0.1"
 API_PORT = 8000
 
+# Gemini API configuration
+GEMINI_API_KEY = "AIzaSyDuHhCsGdPRq-ea4H3ENmyUc4WNnTAS2Uc"
+
 # Class display information
 CLASS_INFO = {
     "glioma": {"display": "Glioma", "type": "tumor", "description": "Brain tumor - Glioma"},
