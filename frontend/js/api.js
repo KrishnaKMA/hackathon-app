@@ -7,7 +7,9 @@ window.AppModules.api = (() => {
     window.location.hostname === "" ||
     window.location.protocol === "file:";
 
-  const API_BASE = isLocalhost ? "http://127.0.0.1:8000" : "/api";
+  const API_BASE = isLocalhost 
+    ? "http://127.0.0.1:8000" 
+    : "https://hackathon-app-88w3.onrender.com";
 
   async function postFile(path, file) {
     const form = new FormData();
