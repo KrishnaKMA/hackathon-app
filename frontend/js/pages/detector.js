@@ -69,7 +69,7 @@ window.AppModules.detector = (() => {
     async function loadExplanation(id, signal) {
       explanation.textContent = "Preparing educational explanation..."; retryAI.hidden = true;
       try {
-        const data = await api.chat("Explain the top prediction and main uncertainty in at most 90 words. Use short plain-text paragraphs, no Markdown or tables. Explain that confidence is not diagnostic accuracy and Grad-CAM is not a tumor outline.", context(), signal);
+        const data = await api.chat("Explain this prediction in 2-3 short sentences, at most 60 words, in one plain-text paragraph. Mention the top score and main uncertainty. Confidence is not diagnostic accuracy; Grad-CAM is not a tumor outline.", context(), signal);
         if (!current(id)) return;
         explanation.textContent = data.response;
         retryAI.hidden = data.status === "ok";
