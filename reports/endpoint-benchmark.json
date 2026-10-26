@@ -1,0 +1,510 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "runs": 30,
+  "timings": {
+    "http_roundtrip": {
+      "median_ms": 63.21584999386687,
+      "p95_ms": 75.485949999711,
+      "n": 30
+    },
+    "upload_validate": {
+      "median_ms": 1.0965,
+      "p95_ms": 1.5435999999999996,
+      "n": 30
+    },
+    "queue": {
+      "median_ms": 0.0075,
+      "p95_ms": 0.009549999999999998,
+      "n": 30
+    },
+    "preprocess": {
+      "median_ms": 19.3925,
+      "p95_ms": 24.47005,
+      "n": 30
+    },
+    "inference": {
+      "median_ms": 37.5975,
+      "p95_ms": 48.89024999999997,
+      "n": 30
+    },
+    "response": {
+      "median_ms": 0.069,
+      "p95_ms": 0.1021,
+      "n": 30
+    },
+    "total": {
+      "median_ms": 58.701499999999996,
+      "p95_ms": 70.47604999999999,
+      "n": 30
+    },
+    "heatmap_http_roundtrip": {
+      "median_ms": 895.9577000059653,
+      "p95_ms": 1098.4363000025041,
+      "n": 11
+    }
+  },
+  "cases": [
+    {
+      "file": "1.webp",
+      "prediction": {
+        "predicted_class": "notumor",
+        "predicted_display": "No Tumor",
+        "confidence": 0.8641,
+        "confidence_pct": 86.41,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.0001,
+            "confidence_pct": 0.01,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.1356,
+            "confidence_pct": 13.56,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.8641,
+            "confidence_pct": 86.41,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.0001,
+            "confidence_pct": 0.01,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": false,
+        "message": "Model predicts no tumor (confidence: 86.41%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        630,
+        630
+      ]
+    },
+    {
+      "file": "2.webp",
+      "prediction": {
+        "predicted_class": "notumor",
+        "predicted_display": "No Tumor",
+        "confidence": 0.8641,
+        "confidence_pct": 86.41,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.0001,
+            "confidence_pct": 0.01,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.1356,
+            "confidence_pct": 13.56,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.8641,
+            "confidence_pct": 86.41,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.0001,
+            "confidence_pct": 0.01,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": false,
+        "message": "Model predicts no tumor (confidence: 86.41%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        630,
+        630
+      ]
+    },
+    {
+      "file": "3.webp",
+      "prediction": {
+        "predicted_class": "meningioma",
+        "predicted_display": "Meningioma",
+        "confidence": 0.4903,
+        "confidence_pct": 49.03,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.1083,
+            "confidence_pct": 10.83,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.4903,
+            "confidence_pct": 49.03,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.3479,
+            "confidence_pct": 34.79,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.0535,
+            "confidence_pct": 5.35,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": true,
+        "message": "Model predicts: Meningioma (confidence: 49.03%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        768,
+        910
+      ]
+    },
+    {
+      "file": "4.webp",
+      "prediction": {
+        "predicted_class": "notumor",
+        "predicted_display": "No Tumor",
+        "confidence": 1.0,
+        "confidence_pct": 100.0,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.0,
+            "confidence_pct": 0.0,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.0,
+            "confidence_pct": 0.0,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 1.0,
+            "confidence_pct": 100.0,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.0,
+            "confidence_pct": 0.0,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": false,
+        "message": "Model predicts no tumor (confidence: 100.0%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        442,
+        442
+      ]
+    },
+    {
+      "file": "5.webp",
+      "prediction": {
+        "predicted_class": "notumor",
+        "predicted_display": "No Tumor",
+        "confidence": 0.9997,
+        "confidence_pct": 99.97,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.0,
+            "confidence_pct": 0.0,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.0003,
+            "confidence_pct": 0.03,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.9997,
+            "confidence_pct": 99.97,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.0,
+            "confidence_pct": 0.0,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": false,
+        "message": "Model predicts no tumor (confidence: 99.97%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        617,
+        617
+      ]
+    },
+    {
+      "file": "6.webp",
+      "prediction": {
+        "predicted_class": "meningioma",
+        "predicted_display": "Meningioma",
+        "confidence": 0.8219,
+        "confidence_pct": 82.19,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.0043,
+            "confidence_pct": 0.43,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.8219,
+            "confidence_pct": 82.19,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.1691,
+            "confidence_pct": 16.91,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.0046,
+            "confidence_pct": 0.46,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": true,
+        "message": "Model predicts: Meningioma (confidence: 82.19%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        817,
+        1024
+      ]
+    },
+    {
+      "file": "7.webp",
+      "prediction": {
+        "predicted_class": "meningioma",
+        "predicted_display": "Meningioma",
+        "confidence": 0.6146,
+        "confidence_pct": 61.46,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.1134,
+            "confidence_pct": 11.34,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.6146,
+            "confidence_pct": 61.46,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.0286,
+            "confidence_pct": 2.86,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.2434,
+            "confidence_pct": 24.34,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": true,
+        "message": "Model predicts: Meningioma (confidence: 61.46%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        945,
+        1024
+      ]
+    },
+    {
+      "file": "8.webp",
+      "prediction": {
+        "predicted_class": "meningioma",
+        "predicted_display": "Meningioma",
+        "confidence": 0.6146,
+        "confidence_pct": 61.46,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.1134,
+            "confidence_pct": 11.34,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.6146,
+            "confidence_pct": 61.46,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.0286,
+            "confidence_pct": 2.86,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.2434,
+            "confidence_pct": 24.34,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": true,
+        "message": "Model predicts: Meningioma (confidence: 61.46%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        945,
+        1024
+      ]
+    },
+    {
+      "file": "9.webp",
+      "prediction": {
+        "predicted_class": "meningioma",
+        "predicted_display": "Meningioma",
+        "confidence": 0.8247,
+        "confidence_pct": 82.47,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.0024,
+            "confidence_pct": 0.24,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.8247,
+            "confidence_pct": 82.47,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.145,
+            "confidence_pct": 14.5,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.0279,
+            "confidence_pct": 2.79,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": true,
+        "message": "Model predicts: Meningioma (confidence: 82.47%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        319,
+        360
+      ]
+    },
+    {
+      "file": "10.webp",
+      "prediction": {
+        "predicted_class": "pituitary",
+        "predicted_display": "Pituitary",
+        "confidence": 0.4821,
+        "confidence_pct": 48.21,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.0,
+            "confidence_pct": 0.0,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.0872,
+            "confidence_pct": 8.72,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.4306,
+            "confidence_pct": 43.06,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.4821,
+            "confidence_pct": 48.21,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": true,
+        "message": "Model predicts: Pituitary (confidence: 48.21%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        815,
+        818
+      ]
+    },
+    {
+      "file": "11.webp",
+      "prediction": {
+        "predicted_class": "notumor",
+        "predicted_display": "No Tumor",
+        "confidence": 0.5643,
+        "confidence_pct": 56.43,
+        "all_predictions": {
+          "glioma": {
+            "probability": 0.0,
+            "confidence_pct": 0.0,
+            "display": "Glioma",
+            "type": "tumor"
+          },
+          "meningioma": {
+            "probability": 0.0041,
+            "confidence_pct": 0.41,
+            "display": "Meningioma",
+            "type": "tumor"
+          },
+          "notumor": {
+            "probability": 0.5643,
+            "confidence_pct": 56.43,
+            "display": "No Tumor",
+            "type": "normal"
+          },
+          "pituitary": {
+            "probability": 0.4316,
+            "confidence_pct": 43.16,
+            "display": "Pituitary",
+            "type": "tumor"
+          }
+        },
+        "is_tumor": false,
+        "message": "Model predicts no tumor (confidence: 56.43%)"
+      },
+      "heatmap_status": 200,
+      "heatmap_dimensions": [
+        630,
+        630
+      ]
+    }
+  ]
+}

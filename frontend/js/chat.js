@@ -57,7 +57,7 @@ window.AppModules.chat = (() => {
       try {
         const data = await api.chat(text);
         appendMessage(messages, "assistant", data.response || data.reply || "Sorry, I couldn't generate a response.");
-        if (status) status.textContent = "Powered by Gemini (server-side).";
+        if (status) status.textContent = data.status === "ok" ? "Powered by Groq (server-side)." : "Assistant unavailable. Check backend configuration or try again later.";
       } catch (err) {
         appendMessage(messages, "assistant", "Sorry, I couldn't reach the assistant right now.");
         if (status) status.textContent = "Assistant unavailable. Please try again later.";

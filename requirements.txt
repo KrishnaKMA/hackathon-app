@@ -1,9 +1,1 @@
-fastapi
-uvicorn[standard]
-gunicorn
-numpy
-tensorflow
-pillow
-scipy
-python-multipart
-httpx
+-r backend/requirements.txt

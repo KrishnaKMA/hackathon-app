@@ -1,0 +1,42 @@
+name: Deployed model evaluation
+on:
+  deployment_status:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 14 * * 1'
+permissions:
+  contents: read
+concurrency:
+  group: deployed-model-evaluation
+  cancel-in-progress: false
+jobs:
+  evaluate:
+    if: vars.EVALUATION_API_URL != '' && (github.event_name != 'deployment_status' || github.event.deployment_status.state == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      EVALUATION_API_URL: ${{ vars.EVALUATION_API_URL }}
+      EVALUATION_MODEL_VERSION: ${{ github.event.deployment.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      # API evaluation needs no local TensorFlow and no LLM credentials.
+      - run: pip install -r requirements-test.txt
+      - name: Evaluate all labelled fixtures against the deployed API
+        run: >-
+          python scripts/evaluate.py
+          --api-url "$EVALUATION_API_URL"
+          --model-version "$EVALUATION_MODEL_VERSION"
+          --compare reports/evaluations/baseline.json
+          --output reports/deployed-evaluations
+      - name: Publish metrics in run summary
+        run: cat reports/deployed-evaluations/latest.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: deployed-evaluation-${{ github.run_id }}
+          path: reports/deployed-evaluations/
+          retention-days: 90
