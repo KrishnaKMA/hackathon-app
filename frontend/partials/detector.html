@@ -1,6 +1,14 @@
 <!-- DETECTOR PAGE -->
 <section id="detector" class="page">
   <div class="detector-container">
+    <section class="detector-card detector-overview" aria-label="Model overview">
+      <dl class="model-metrics">
+        <div><dt>Classes</dt><dd>4</dd></div>
+        <div><dt>Accuracy</dt><dd>89.1%</dd></div>
+        <div><dt>Macro-F1</dt><dd>0.8837</dd></div>
+      </dl>
+      <div class="model-summary"><div class="model-class-list"><span>Glioma</span><span>Meningioma</span><span>Pituitary</span><span>No Tumor</span></div><p>Evaluated on 1,311 labelled images. Dataset-specific results.</p></div>
+    </section>
     <div class="detector-layout">
       <div class="detector-main">
         <div class="detector-card scan-card">
@@ -17,6 +25,17 @@
           </div></div>
           <div class="heatmap-legend" id="heatmapLegend" hidden>Lower influence <span aria-hidden="true"></span> Higher influence</div>
           <p class="heatmap-note">For reference only. Consult a medical professional.</p>
+        </div>
+        <div class="scan-support">
+          <section class="detector-card tips-card">
+            <h3>Quick Tips</h3>
+            <ul><li>Choose a clear MRI slice in JPG, PNG, or WebP.</li><li>Compare all four scores to understand uncertainty.</li><li>Ask the chat if you want help reading your results.</li></ul>
+          </section>
+          <details class="detector-card raw-card">
+            <summary>Raw output</summary>
+            <p>The prediction data returned by the model.</p>
+            <pre id="rawOutput" class="raw-output">{ }</pre>
+          </details>
         </div>
       </div>
       <aside class="detector-raw">

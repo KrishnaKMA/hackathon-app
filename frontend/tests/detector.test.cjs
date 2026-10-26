@@ -31,6 +31,7 @@ test("classification renders before pending optional stages and double clicks do
   const s = setup({ predict: async () => { count++; return prediction("glioma"); }, heatmap: () => heat.promise, chat: () => { chatCount++; return ai.promise; } });
   s.upload("one.webp"); s.get("predictBtn").click(); s.get("predictBtn").click(); await tick();
   assert.equal(count, 1);
+  assert.equal(JSON.parse(s.get("rawOutput").textContent).predicted_class, "glioma");
   assert.match(s.get("result").textContent, /glioma/);
   assert.match(s.window.document.querySelector(".heatmap-status").textContent, /Generating Grad-CAM/);
   heat.resolve({ heatmap: "data:image/png;base64,test" }); ai.resolve({ response: "AI offline", status: "degraded" }); await tick();
