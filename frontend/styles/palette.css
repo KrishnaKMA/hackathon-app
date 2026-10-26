@@ -41,7 +41,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .assistant-fab { background: var(--accent); color: var(--background); }
 .assistant-message.user, .chat-message.user { background: var(--surface-raised); color: var(--text); }
 .assistant-message.assistant, .chat-message.assistant { background: var(--background); color: var(--text); }
-.result-stages { margin-top: 20px; padding: 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text); }
-.result-stages p { margin-bottom: 12px; line-height: 1.6; }
+.result-stages { margin-top: 0; padding: 16px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text); }
+.result-stages p { margin-bottom: 12px; line-height: 1.6; font-size: 13px; white-space: pre-line; overflow-wrap: anywhere; }
 .result-stages button { margin-bottom: 12px; }
 [hidden] { display: none !important; }

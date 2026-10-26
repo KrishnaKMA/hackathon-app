@@ -7,6 +7,7 @@ window.AppModules.detector = (() => {
     const fileInput = get("file"), predictBtn = get("predictBtn");
     const preview = get("preview"), heatmapImg = get("heatmap"), heatmapBtn = get("heatmapBtn");
     const status = get("status"), result = get("result");
+    const legend = get("heatmapLegend");
     const chatInput = get("detectorChatInput"), sendBtn = get("detectorChatSendBtn"), messages = get("detectorChatMessages");
     if (!fileInput || !predictBtn || !preview || !heatmapImg || !result) return;
 
@@ -27,6 +28,7 @@ window.AppModules.detector = (() => {
     function reset() {
       version += 1; controller.abort(); controller = new AbortController();
       lastPrediction = null; heatmapData = null; showingHeatmap = false; busy = false;
+      if (legend) legend.hidden = true;
       predictBtn.disabled = false;
       if (sendBtn) sendBtn.disabled = false;
       if (messages) messages.replaceChildren();
@@ -55,7 +57,8 @@ window.AppModules.detector = (() => {
         if (!current(id)) return;
         heatmapData = data.heatmap; showingHeatmap = true;
         ui.showHeatmap(preview, heatmapImg, heatmapData);
-        heatStatus.textContent = "Grad-CAM ready. Visualization of model influence only.";
+        heatStatus.textContent = "Grad-CAM ready. Stronger model influence is highlighted; this is not a tumor outline.";
+        if (legend) legend.hidden = false;
         ui.setHeatmapButton(heatmapBtn, { visible: true, disabled: false, text: "Show original" });
       } catch (error) {
         if (!current(id) || error.name === "AbortError") return;
@@ -66,7 +69,7 @@ window.AppModules.detector = (() => {
     async function loadExplanation(id, signal) {
       explanation.textContent = "Preparing educational explanation..."; retryAI.hidden = true;
       try {
-        const data = await api.chat("Explain this model prediction, all four scores, and its limitations in plain language.", context(), signal);
+        const data = await api.chat("Explain the top prediction and main uncertainty in at most 90 words. Use short plain-text paragraphs, no Markdown or tables. Explain that confidence is not diagnostic accuracy and Grad-CAM is not a tumor outline.", context(), signal);
         if (!current(id)) return;
         explanation.textContent = data.response;
         retryAI.hidden = data.status === "ok";
@@ -105,6 +108,7 @@ window.AppModules.detector = (() => {
       showingHeatmap = !showingHeatmap;
       if (showingHeatmap) ui.showHeatmap(preview, heatmapImg, heatmapData);
       else ui.showPreview(preview, heatmapImg);
+      if (legend) legend.hidden = !showingHeatmap;
       heatmapBtn.textContent = showingHeatmap ? "Show original" : "Show Grad-CAM";
     });
     retryHeat.addEventListener("click", () => {

@@ -58,8 +58,10 @@ def generate_heatmap_image(model, contents: bytes) -> str:
         resized = np.asarray(
             Image.fromarray(cam).resize(image.size, Image.Resampling.BILINEAR)
         )
-    # Continuous red overlay preserves image detail; zero activation adds no color.
-    alpha = (0.45 * np.clip(resized, 0, 1))[..., None]
+    # Display only stronger relative influence; retain the unmodified Grad-CAM.
+    # This is a visualization transfer function, not a tumor segmentation mask.
+    strength = np.clip((resized - 0.35) / 0.65, 0, 1)
+    alpha = (0.60 * strength**1.5)[..., None]
     # Blend in-place to bound memory even at the configured four-million-pixel limit.
     original *= 1 - alpha
     original[..., 0] += 255 * alpha[..., 0]

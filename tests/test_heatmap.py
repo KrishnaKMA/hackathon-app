@@ -22,3 +22,25 @@ def test_gradcam_real_model(real_model, user_cases, number):
     overlay = Image.open(io.BytesIO(base64.b64decode(encoded.split(",")[1])))
     assert overlay.size == Image.open(io.BytesIO(contents)).size
     assert overlay.format == "PNG"
+
+
+@pytest.mark.parametrize("activation", [0.0, 0.2, 1.0])
+def test_overlay_preserves_weak_regions_and_dimensions(monkeypatch, activation):
+    from backend.services import heatmap_service
+
+    monkeypatch.setattr(
+        heatmap_service,
+        "gradcam_values",
+        lambda model, contents: np.full((7, 7), activation, dtype=np.float32),
+    )
+    source = io.BytesIO()
+    Image.new("RGB", (32, 24), (100, 120, 140)).save(source, format="PNG")
+    encoded = generate_heatmap_image(None, source.getvalue())
+    overlay = Image.open(io.BytesIO(base64.b64decode(encoded.split(",")[1])))
+    pixels = np.asarray(overlay)
+    assert overlay.size == (32, 24)
+    if activation <= 0.35:
+        assert np.all(pixels == [100, 120, 140])
+    else:
+        assert np.all(pixels[..., 0] > 100)
+        assert np.all(pixels[..., 1] < 120)

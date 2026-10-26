@@ -66,20 +66,22 @@
                             </div>
                             <div class="preview-grid">
                                 <div class="media-frame">
-                                    <img id="preview" class="hidden" />
-                                    <img id="heatmap" class="hidden heatmap-image" />
+                                    <img id="preview" class="hidden" alt="Original MRI scan" />
+                                    <img id="heatmap" class="hidden heatmap-image" alt="Grad-CAM model influence overlay" />
                                 </div>
                             </div>
+                            <div class="heatmap-legend" id="heatmapLegend" hidden>Lower influence <span aria-hidden="true"></span> Higher influence</div>
+                            <p class="heatmap-note">Grad-CAM shows coarse model influence, including for "No Tumor" predictions. It does not outline a tumor. Low influence stays transparent.</p>
                         </div>
 
                     </div>
 
                     <aside class="detector-raw reveal delay-200">
-                        <div class="detector-card raw-card">
-                            <div class="raw-title">Raw Output</div>
-                            <pre id="rawOutput" class="raw-output">{ }</pre>
-                        </div>
                         <div id="result" class="detector-card result-placeholder result-card">Upload an MRI scan to generate results.</div>
+                        <details class="detector-card raw-card">
+                            <summary>View raw output</summary>
+                            <pre id="rawOutput" class="raw-output">{ }</pre>
+                        </details>
                     </aside>
                 </div>
             </div>
