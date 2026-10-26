@@ -55,7 +55,7 @@ window.AppModules.detector = (() => {
         if (!current(id)) return;
         heatmapData = data.heatmap; showingHeatmap = true;
         ui.showHeatmap(preview, heatmapImg, heatmapData);
-        heatStatus.textContent = "Grad-CAM ready.";
+        heatStatus.textContent = "";
         if (legend) legend.hidden = false;
         ui.setHeatmapButton(heatmapBtn, { visible: true, disabled: false, text: "Show original" });
       } catch (error) {
