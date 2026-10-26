@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap");
 @import url("styles/base.css");
-@import url("styles/home.css");
+@import url("styles/home.css?v=20261026-5");
 @import url("styles/learn.css");
-@import url("styles/detector.css");
+@import url("styles/detector.css?v=20261026-5");
 @import url("styles/citations.css");
 @import url("styles/assistant.css");
-@import url("styles/responsive.css?v=20261026-2");
+@import url("styles/responsive.css?v=20261026-5");
 
-@import url("styles/palette.css?v=20261026-3");
+@import url("styles/palette.css?v=20261026-5");

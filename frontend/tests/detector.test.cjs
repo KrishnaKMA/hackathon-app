@@ -68,3 +68,23 @@ test("stale optional responses and errors preserve current results", async () =>
   assert.equal(s.window.document.querySelectorAll(".heatmap-status button")[0].hidden, false);
   s.dom.window.close();
 });
+
+
+test("No Tumor keeps original scan, hides heatmap, and never auto-requests chat", async () => {
+  let heatCount = 0, chatCount = 0;
+  const s = setup({ predict: async () => ({ ...prediction("notumor"), is_tumor: false }),
+    heatmap: async () => { heatCount++; return { heatmap: "data:image/png;base64,bad" }; },
+    chat: async () => { chatCount++; return { response: "Hello", status: "ok" }; } });
+  s.upload("normal.webp"); s.get("predictBtn").click(); await tick();
+  assert.equal(heatCount, 0);
+  assert.equal(chatCount, 0);
+  assert.equal(s.get("heatmapBtn").classList.contains("hidden"), true);
+  assert.equal(s.get("heatmap").classList.contains("hidden"), true);
+  assert.equal(s.get("preview").classList.contains("hidden"), false);
+  assert.equal(s.get("status").textContent, "Analysis complete");
+  s.get("detectorChatInput").value = "Hello";
+  s.get("detectorChatSendBtn").click(); await tick();
+  assert.equal(chatCount, 1);
+  assert.match(s.get("detectorChatMessages").textContent, /Hello/);
+  s.dom.window.close();
+});

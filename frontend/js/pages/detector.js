@@ -71,14 +71,16 @@ window.AppModules.detector = (() => {
       const id = version, signal = controller.signal;
       ui.setStatus(status, "Analyzing...", "info"); ui.renderLoading(result);
       try {
-        const requestStarted = performance.now();
         const data = await api.predict(file, signal);
-        const requestMs = performance.now() - requestStarted;
         if (!current(id)) return;
         lastPrediction = data; ui.renderResult(result, data);
-        ui.setStatus(status, `Prediction ready (${requestMs.toFixed(0)} ms)`, "success");
+        ui.setStatus(status, "Analysis complete", "success");
         // Classification is rendered before independent optional requests start.
-        void loadHeatmap(id, file, signal);
+        if (data.predicted_class === "notumor" || data.is_tumor === false) {
+          heatStatus.textContent = "Original scan shown for No Tumor prediction.";
+        } else {
+          void loadHeatmap(id, file, signal);
+        }
       } catch (error) {
         if (!current(id) || error.name === "AbortError") return;
         ui.setStatus(status, "Prediction unavailable ... retry", "error");

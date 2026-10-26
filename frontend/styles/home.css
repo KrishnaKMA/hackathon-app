@@ -496,3 +496,8 @@
                 border-color: rgba(169, 155, 255, 0.45);
             }
         }
+
+.tech-carousel-track { width: 100%; animation: none; mask-image: none; -webkit-mask-image: none; }
+.tech-carousel-group { width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; padding: 12px 20px; }
+.tech-carousel-group[aria-hidden="true"] { display: none; }
+.tech-item, .tech-item.badge { padding: 10px 16px; font-size: 13px; }
