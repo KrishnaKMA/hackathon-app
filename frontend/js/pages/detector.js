@@ -12,16 +12,14 @@ window.AppModules.detector = (() => {
     if (!fileInput || !predictBtn || !preview || !heatmapImg || !result) return;
 
     const stages = document.createElement("div");
-    stages.className = "result-stages";
+    stages.className = "heatmap-status";
     stages.setAttribute("aria-live", "polite");
-    result.after(stages);
-    const heatStatus = document.createElement("p"), explanation = document.createElement("p");
-    const retryHeat = document.createElement("button"), retryAI = document.createElement("button");
-    retryHeat.textContent = "Retry heatmap"; retryAI.textContent = "Retry explanation";
-    const notice = document.createElement("p");
-    notice.textContent = "Educational model prediction, not a diagnosis. Confidence is not guaranteed accuracy. Grad-CAM highlights model influence, not confirmed tumor location. A clinician must interpret MRI scans.";
-    stages.append(heatStatus, retryHeat, explanation, retryAI, notice);
-    retryHeat.hidden = retryAI.hidden = true;
+    (legend || preview).after(stages);
+    const heatStatus = document.createElement("span");
+    const retryHeat = document.createElement("button");
+    retryHeat.textContent = "Retry heatmap";
+    stages.append(heatStatus, retryHeat);
+    retryHeat.hidden = true;
     let version = 0, controller = new AbortController(), lastPrediction = null;
     let heatmapData = null, showingHeatmap = false, previewUrl = null, busy = false;
     const current = (id) => id === version;
@@ -32,8 +30,8 @@ window.AppModules.detector = (() => {
       predictBtn.disabled = false;
       if (sendBtn) sendBtn.disabled = false;
       if (messages) messages.replaceChildren();
-      heatStatus.textContent = explanation.textContent = "";
-      retryHeat.hidden = retryAI.hidden = true;
+      heatStatus.textContent = "";
+      retryHeat.hidden = true;
       ui.showPreview(preview, heatmapImg);
       ui.setHeatmapButton(heatmapBtn, { visible: false, disabled: false, text: "Show heatmap" });
     }
@@ -57,26 +55,13 @@ window.AppModules.detector = (() => {
         if (!current(id)) return;
         heatmapData = data.heatmap; showingHeatmap = true;
         ui.showHeatmap(preview, heatmapImg, heatmapData);
-        heatStatus.textContent = "Grad-CAM ready. Stronger model influence is highlighted; this is not a tumor outline.";
+        heatStatus.textContent = "Grad-CAM ready.";
         if (legend) legend.hidden = false;
         ui.setHeatmapButton(heatmapBtn, { visible: true, disabled: false, text: "Show original" });
       } catch (error) {
         if (!current(id) || error.name === "AbortError") return;
-        heatStatus.textContent = "Heatmap unavailable. Your classification remains above.";
+        heatStatus.textContent = "Heatmap unavailable. Prediction is still ready.";
         retryHeat.hidden = false;
-      }
-    }
-    async function loadExplanation(id, signal) {
-      explanation.textContent = "Preparing educational explanation..."; retryAI.hidden = true;
-      try {
-        const data = await api.chat("Explain this prediction in 2-3 short sentences, at most 60 words, in one plain-text paragraph. Mention the top score and main uncertainty. Confidence is not diagnostic accuracy; Grad-CAM is not a tumor outline.", context(), signal);
-        if (!current(id)) return;
-        explanation.textContent = data.response;
-        retryAI.hidden = data.status === "ok";
-      } catch (error) {
-        if (!current(id) || error.name === "AbortError") return;
-        explanation.textContent = "Explanation unavailable. Your classification remains above.";
-        retryAI.hidden = false;
       }
     }
     predictBtn.addEventListener("click", async () => {
@@ -94,7 +79,6 @@ window.AppModules.detector = (() => {
         ui.setStatus(status, `Prediction ready (${requestMs.toFixed(0)} ms)`, "success");
         // Classification is rendered before independent optional requests start.
         void loadHeatmap(id, file, signal);
-        void loadExplanation(id, signal);
       } catch (error) {
         if (!current(id) || error.name === "AbortError") return;
         ui.setStatus(status, "Prediction unavailable ... retry", "error");
@@ -113,9 +97,6 @@ window.AppModules.detector = (() => {
     });
     retryHeat.addEventListener("click", () => {
       if (lastPrediction) void loadHeatmap(version, fileInput.files[0], controller.signal);
-    });
-    retryAI.addEventListener("click", () => {
-      if (lastPrediction) void loadExplanation(version, controller.signal);
     });
     function addMessage(text, type) {
       if (!messages) return null;

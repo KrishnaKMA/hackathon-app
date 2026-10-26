@@ -27,16 +27,18 @@ function setup(api) {
 }
 
 test("classification renders before pending optional stages and double clicks do not duplicate", async () => {
-  const heat = deferred(), ai = deferred(); let count = 0;
-  const s = setup({ predict: async () => { count++; return prediction("glioma"); }, heatmap: () => heat.promise, chat: () => ai.promise });
+  const heat = deferred(), ai = deferred(); let count = 0, chatCount = 0;
+  const s = setup({ predict: async () => { count++; return prediction("glioma"); }, heatmap: () => heat.promise, chat: () => { chatCount++; return ai.promise; } });
   s.upload("one.webp"); s.get("predictBtn").click(); s.get("predictBtn").click(); await tick();
   assert.equal(count, 1);
   assert.match(s.get("result").textContent, /glioma/);
-  assert.match(s.window.document.querySelector(".result-stages").textContent, /Generating Grad-CAM/);
+  assert.match(s.window.document.querySelector(".heatmap-status").textContent, /Generating Grad-CAM/);
   heat.resolve({ heatmap: "data:image/png;base64,test" }); ai.resolve({ response: "AI offline", status: "degraded" }); await tick();
   assert.match(s.get("result").textContent, /glioma/);
   assert.equal(s.get("heatmap").src, "data:image/png;base64,test");
-  assert.equal(s.window.document.querySelectorAll(".result-stages button")[1].hidden, false);
+  assert.equal(chatCount, 0);
+  assert.equal(s.window.document.querySelector(".result-stages"), null);
+  assert.equal(s.window.document.querySelector(".heatmap-status").parentElement, s.get("preview").closest(".detector-card"));
   s.dom.window.close();
 });
 
@@ -61,8 +63,8 @@ test("stale optional responses and errors preserve current results", async () =>
   s.upload("new.webp"); s.get("predictBtn").click(); await tick();
   oldHeat.resolve({ heatmap: "data:image/png;base64,old" }); oldAI.resolve({ response: "OLD EXPLANATION", status: "ok" }); await tick();
   assert.match(s.get("result").textContent, /meningioma/);
-  assert.doesNotMatch(s.window.document.querySelector(".result-stages").textContent, /OLD EXPLANATION/);
+  assert.doesNotMatch(s.window.document.querySelector(".heatmap-status").textContent, /OLD EXPLANATION/);
   assert.notEqual(s.get("heatmap").src, "data:image/png;base64,old");
-  assert.equal(s.window.document.querySelectorAll(".result-stages button")[0].hidden, false);
+  assert.equal(s.window.document.querySelectorAll(".heatmap-status button")[0].hidden, false);
   s.dom.window.close();
 });
