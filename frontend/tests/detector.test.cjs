@@ -89,3 +89,21 @@ test("No Tumor keeps original scan, hides heatmap, and never auto-requests chat"
   assert.match(s.get("detectorChatMessages").textContent, /Hello/);
   s.dom.window.close();
 });
+
+
+test("chat remembers successful turns and clears history for a new scan", async () => {
+  const requests = [];
+  const s = setup({ chat: async (message, context, signal, history) => {
+    requests.push({ message, history }); return { response: "Brief answer.", status: "ok" };
+  } });
+  async function ask(text) { s.get("detectorChatInput").value = text; s.get("detectorChatSendBtn").click(); await tick(); }
+  await ask("What is glioma?");
+  await ask("And meningioma?");
+  assert.equal(requests[0].history.length, 0);
+  assert.deepEqual(requests[1].history.map(x => x.role).join(","), "user,assistant");
+  assert.equal(requests[1].history[0].content, "What is glioma?");
+  s.upload("different.webp");
+  await ask("Hello");
+  assert.equal(requests[2].history.length, 0);
+  s.dom.window.close();
+});

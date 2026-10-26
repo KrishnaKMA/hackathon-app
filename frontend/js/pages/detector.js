@@ -20,10 +20,12 @@ window.AppModules.detector = (() => {
     retryHeat.textContent = "Retry heatmap";
     stages.append(heatStatus, retryHeat);
     retryHeat.hidden = true;
+    let history = [];
     let version = 0, controller = new AbortController(), lastPrediction = null;
     let heatmapData = null, showingHeatmap = false, previewUrl = null, busy = false;
     const current = (id) => id === version;
     function reset() {
+      history = [];
       version += 1; controller.abort(); controller = new AbortController();
       lastPrediction = null; heatmapData = null; showingHeatmap = false; busy = false;
       if (legend) legend.hidden = true;
@@ -112,8 +114,9 @@ window.AppModules.detector = (() => {
       const id = version; chatInput.value = ""; if (sendBtn) sendBtn.disabled = true;
       addMessage(text, "user"); const loading = addMessage("Thinking...", "loading");
       try {
-        const data = await api.chat(text, context(), controller.signal);
+        const data = await api.chat(text, context(), controller.signal, history);
         if (!current(id)) return;
+        if (data.status === "ok") history = [...history, { role: "user", content: text.slice(0, 1000) }, { role: "assistant", content: data.response.slice(0, 1000) }].slice(-6);
         addMessage(data.response, data.status === "ok" ? "assistant" : "error");
       } catch (error) {
         if (current(id) && error.name !== "AbortError") addMessage("Assistant unavailable. Please retry your question.", "error");

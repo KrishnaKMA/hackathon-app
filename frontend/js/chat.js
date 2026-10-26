@@ -22,6 +22,7 @@ window.AppModules.chat = (() => {
 
     if (!form || !input || !sendBtn || !messages || !toggle || !panel) return;
 
+    let history = [];
     const setOpen = (isOpen) => {
       panel.classList.toggle("open", isOpen);
       panel.setAttribute("aria-hidden", isOpen ? "false" : "true");
@@ -47,7 +48,7 @@ window.AppModules.chat = (() => {
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const text = input.value.trim();
-      if (!text) return;
+      if (!text || sendBtn.disabled) return;
 
       appendMessage(messages, "user", text);
       input.value = "";
@@ -55,7 +56,8 @@ window.AppModules.chat = (() => {
       if (status) status.textContent = "Thinking...";
 
       try {
-        const data = await api.chat(text);
+        const data = await api.chat(text, null, undefined, history);
+        if (data.status === "ok") history = [...history, { role: "user", content: text.slice(0, 1000) }, { role: "assistant", content: data.response.slice(0, 1000) }].slice(-6);
         appendMessage(messages, "assistant", data.response || data.reply || "Sorry, I couldn't generate a response.");
         if (status) status.textContent = data.status === "ok" ? "Powered by Groq (server-side)." : "Assistant unavailable. Check backend configuration or try again later.";
       } catch (err) {

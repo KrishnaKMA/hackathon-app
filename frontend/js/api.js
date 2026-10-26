@@ -27,9 +27,9 @@ window.AppModules.api = (() => {
 
   function predict(file, signal) { return postFile("/api/predict", file, signal); }
   function heatmap(file, signal) { return postFile("/api/heatmap", file, signal); }
-  function chat(message, context = null, signal) {
+  function chat(message, context = null, signal, history = []) {
     return request("/api/chat", { method: "POST", signal,
-      headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message, context }) });
+      headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message, context, history }) });
   }
   function ready(signal) { return request("/api/ready", { signal }); }
   return { predict, heatmap, chat, ready, timings };
