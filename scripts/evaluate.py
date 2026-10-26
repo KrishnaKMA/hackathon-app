@@ -96,6 +96,8 @@ def main():
             "version": args.model_version or MODEL_PATH.stem,
             "sha256": hashlib.sha256(MODEL_PATH.read_bytes()).hexdigest(),
             "source": "local weights",
+            "backend": getattr(model, "backend", "keras"),
+            "runtime_sha256": getattr(model, "runtime_sha256", None),
         }
     outcomes = []
     try:

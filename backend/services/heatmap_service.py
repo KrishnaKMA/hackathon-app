@@ -13,6 +13,8 @@ _extractors = weakref.WeakKeyDictionary()
 
 
 def gradcam_values(model, contents: bytes):
+    if getattr(model, "backend", None) == "tflite":
+        return model.gradcam(preprocess_image(contents))
     import tensorflow as tf
 
     base = model.get_layer("mobilenetv2_1.00_224")
@@ -58,9 +60,11 @@ def generate_heatmap_image(model, contents: bytes) -> str:
         )
     # Continuous red overlay preserves image detail; zero activation adds no color.
     alpha = (0.45 * np.clip(resized, 0, 1))[..., None]
-    red = np.zeros_like(original)
-    red[..., 0] = 255
-    overlay = np.clip(original * (1 - alpha) + red * alpha, 0, 255).astype(np.uint8)
+    # Blend in-place to bound memory even at the configured four-million-pixel limit.
+    original *= 1 - alpha
+    original[..., 0] += 255 * alpha[..., 0]
+    np.clip(original, 0, 255, out=original)
+    overlay = original.astype(np.uint8)
     buffer = io.BytesIO()
     Image.fromarray(overlay).save(buffer, format="PNG")
     return "data:image/png;base64," + base64.b64encode(buffer.getvalue()).decode(

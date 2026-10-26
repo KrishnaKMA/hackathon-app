@@ -7,7 +7,7 @@ const root = path.join(__dirname, "..");
 for (const [page, expected] of [
   ["http://127.0.0.1:5500", "http://127.0.0.1:8000/api/ready"],
   ["http://localhost:5500", "http://127.0.0.1:8000/api/ready"],
-  ["https://frontend-4s5x.onrender.com", "https://hackathon-app-88w3.onrender.com/api/ready"]
+  ["https://frontend-4s5x.onrender.com", "https://hackathon-app-adb9.onrender.com/api/ready"]
 ]) {
   test(`API routing for ${page}`, async () => {
     const dom = new JSDOM("", { url: page, runScripts: "outside-only" });

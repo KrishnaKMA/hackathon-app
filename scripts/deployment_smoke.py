@@ -115,6 +115,17 @@ def main():
                     },
                 )
                 assert blocked.status_code == 400
+                assert client.get("/ui/").status_code == 200
+                assert "NeuroDetect" in client.get("/ui/").text
+                assert client.get("/ui/js/config.js").status_code == 200
+                large = io.BytesIO()
+                Image.new("RGB", (2000, 2000), (100, 100, 100)).save(
+                    large, format="PNG"
+                )
+                for _ in range(3):
+                    large_result = upload("/api/heatmap", large.getvalue())
+                    large_result.raise_for_status()
+                result["max_pixel_heatmap_runs"] = 3
                 memory = psutil.Process(process.pid).memory_info()
                 result["rss_mib"] = memory.rss / 1024**2
                 if sys.platform.startswith("linux"):
@@ -125,6 +136,13 @@ def main():
                             result["peak_rss_mib"] = int(line.split()[1]) / 1024
                 elif hasattr(memory, "peak_wset"):
                     result["peak_rss_mib"] = memory.peak_wset / 1024**2
+                if (
+                    sys.platform.startswith("linux")
+                    and result.get("peak_rss_mib", 0) >= 450
+                ):
+                    raise AssertionError(
+                        "Peak RSS leaves insufficient headroom on free 512 MiB hosting"
+                    )
                 result.update(
                     {
                         "ready": True,

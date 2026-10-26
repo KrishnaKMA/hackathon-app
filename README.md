@@ -1,3 +1,8 @@
+> Free-hosting update: Render now uses the validated float32 LiteRT export, without
+> TensorFlow in the serving process. Original Keras weights and reference backend
+> remain available. See the free-runtime section below; older performance reports
+> describe the earlier Keras server.
+
 # NeuroDetect V2
 
 An educational MRI classification prototype using the original MobileNetV2 weights,
@@ -96,7 +101,7 @@ independently of the model.
 | `LLM_PROVIDER` | `groq`; provider dispatch is isolated; unsupported providers degrade explicitly |
 | `GROQ_API_KEY` | Required for live chat; backend only |
 | `GROQ_MODEL` | `openai/gpt-oss-20b`; old `CHAT_MODEL` remains a fallback |
-| `MODEL_BACKEND` | `keras`; evaluated TFLite files are not enabled in the serving runtime |
+| `MODEL_BACKEND` | `keras` locally; `tflite` for the validated free Render runtime |
 | `MODEL_PATH` | Bundled `backend/models/brain_tumor_multiclass.keras` when blank |
 | `INFERENCE_MODE` | `compiled`; alternatives `predict` and `direct` for comparison |
 | `TF_INTRA_THREADS` | `4`, based on local benchmarks; `0` lets TensorFlow choose |
@@ -318,3 +323,36 @@ Final Linux deployment smoke testing observed about **775 MiB peak RSS** with
 prediction and Grad-CAM. Do not deploy this measured configuration on a 512 MiB
 instance. See `reports/FINAL_VALIDATION.md` for the complete pre-push checks and
 remaining Render account verification.
+
+
+## Free Render runtime (current deployment configuration)
+
+`backend/requirements-render.txt` installs LiteRT instead of TensorFlow. Set
+`MODEL_BACKEND=tflite`, `OPENBLAS_NUM_THREADS=1` and `OMP_NUM_THREADS=1`. The original
+MobileNetV2 is exported without quantization to `brain_tumor_float32.tflite`, exposing
+both four-class probabilities and the final convolutional activations. The small
+`gradcam_head.npz` holds the original BatchNorm and Dense weights. SHA-256 checks bind
+these artifacts to the unchanged source Keras file; re-export after changing weights.
+
+Grad-CAM uses the analytic chain rule through BatchNorm, ReLU6, global average pooling
+and the three Dense layers. This produces the same convolution-layer Grad-CAM, without
+loading TensorFlow for automatic differentiation. Equivalence tests compare probability
+arrays and Grad-CAM maps against the Keras reference on the 11 supplied images and
+representatives of all four classes. Full evaluation preserved all 1,311 predicted
+classes and F1 metrics. The original Keras backend remains the local default.
+
+Fresh Linux serving without any TensorFlow package measured about 154 MiB peak RSS for
+normal prediction/heatmap checks and about 237 MiB after three maximum-sized (4 million
+pixel) heatmap requests. In-place overlay blending bounds image memory. These replace
+the previous 775 MiB Keras requirement for the configured free deployment; actual Render
+usage and timing must still be checked after deployment.
+
+The same free service also serves the separate frontend files at `/ui/`. Its API root
+and canonical `/api/...` routes remain intact. The verified account backend is
+`https://hackathon-app-adb9.onrender.com`; the older `88w3` URL is no longer the configured
+production target. No paid compute change is required.
+
+Re-export in a full development environment with `python scripts/export_lite.py`.
+Evaluate with `MODEL_BACKEND=tflite python scripts/evaluate.py --compare reports/evaluations/baseline.json`.
+Measure the deployed API using `python scripts/benchmark_endpoints.py --api-url URL
+--runs 30 --output reports/render-benchmark.json --expected-model-sha SOURCE_SHA256`.

@@ -2,4 +2,4 @@
 window.NEURODETECT_API_BASE_URL = window.NEURODETECT_API_BASE_URL ||
   (["localhost", "127.0.0.1", ""].includes(window.location.hostname)
     ? "http://127.0.0.1:8000"
-    : "https://hackathon-app-88w3.onrender.com");
+    : "https://hackathon-app-adb9.onrender.com");

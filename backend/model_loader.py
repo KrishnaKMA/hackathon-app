@@ -19,12 +19,25 @@ logger = logging.getLogger("neurodetect")
 def load_model():
     start = time.perf_counter()
     import numpy as np
+
+    if MODEL_BACKEND == "tflite":
+        from .services.lite_runtime import LiteModel
+
+        model = LiteModel()
+        sample = np.zeros((1, *IMG_SIZE, 3), dtype=np.float32)
+        for _ in range(3):
+            output = model.predict(sample)
+        if output.shape != (1, 4) or not np.isfinite(output).all():
+            raise ValueError("Unexpected Lite model output during warm-up")
+        logger.info(
+            "Lite model initialized and warmed in %.2f seconds",
+            time.perf_counter() - start,
+        )
+        return model
+    if MODEL_BACKEND != "keras":
+        raise ValueError("MODEL_BACKEND must be keras or tflite")
     import tensorflow as tf
 
-    if MODEL_BACKEND != "keras":
-        raise ValueError(
-            "Only the validated keras runtime is enabled; use scripts/benchmark.py to evaluate TFLite"
-        )
     if TF_INTRA_THREADS:
         tf.config.threading.set_intra_op_parallelism_threads(TF_INTRA_THREADS)
     if TF_INTER_THREADS:

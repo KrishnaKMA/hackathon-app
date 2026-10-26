@@ -2,7 +2,7 @@ services:
   - type: web
     name: neurodetect-api
     runtime: python
-    buildCommand: pip install -r backend/requirements.txt
+    buildCommand: pip install -r backend/requirements-render.txt
     startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT --workers 1
     healthCheckPath: /api/ready
     envVars:
@@ -15,7 +15,11 @@ services:
       - key: GROQ_MODEL
         value: openai/gpt-oss-20b
       - key: MODEL_BACKEND
-        value: keras
+        value: tflite
+      - key: OPENBLAS_NUM_THREADS
+        value: '1'
+      - key: OMP_NUM_THREADS
+        value: '1'
       - key: INFERENCE_MODE
         value: compiled
       - key: ALLOWED_ORIGINS

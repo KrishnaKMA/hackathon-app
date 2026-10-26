@@ -4,10 +4,12 @@ import asyncio
 import logging
 import time
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from .config import CORS_ORIGINS, LOG_LEVEL
 from .model_loader import load_model
@@ -67,3 +69,10 @@ def root():
 async def unhandled_exception_handler(request, exc):
     logger.error("Unhandled server error", exc_info=(type(exc), exc, exc.__traceback__))
     return JSONResponse(status_code=500, content={"error": "Internal server error"})
+
+
+# The frontend remains separate source code; this optional mount provides a free
+# same-service deployment when no separately hosted frontend is configured.
+frontend_path = Path(__file__).resolve().parents[1] / "frontend"
+if frontend_path.is_dir():
+    app.mount("/ui", StaticFiles(directory=frontend_path, html=True), name="frontend")

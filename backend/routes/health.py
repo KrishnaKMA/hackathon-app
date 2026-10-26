@@ -26,5 +26,7 @@ def ready(request: Request):
         raise HTTPException(503, "ML model is not ready")
     return {
         "status": "ready",
+        "model_backend": getattr(request.app.state.model, "backend", "keras"),
+        "runtime_sha256": getattr(request.app.state.model, "runtime_sha256", None),
         "model_sha256": getattr(request.app.state.model, "_neurodetect_sha256", None),
     }
