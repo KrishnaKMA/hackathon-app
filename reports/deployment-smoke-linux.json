@@ -1,0 +1,16 @@
+{
+  "start_command": "uvicorn backend.app:app --host 0.0.0.0 --port $PORT --workers 1",
+  "python": "3.12.10 (main, May 30 2025, 05:37:37) [Clang 20.1.4 ]",
+  "observed_loading": true,
+  "model_sha256": "13163374b4ea2401363a95ddaca153fdf863a6ae7936df8d6c1a25d92a385baf",
+  "predicted_class": "notumor",
+  "max_pixel_heatmap_runs": 3,
+  "rss_mib": 126.26171875,
+  "peak_rss_mib": 235.5625,
+  "ready": true,
+  "prediction": true,
+  "heatmap": true,
+  "invalid_upload": true,
+  "chat_without_key": true,
+  "hosted_cors": true
+}

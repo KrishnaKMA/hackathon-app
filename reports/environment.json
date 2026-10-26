@@ -1,0 +1,23 @@
+{
+  "python": "3.13.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel Core Ultra 7 255U",
+  "logical_cpus": 14,
+  "versions": {
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.5.4",
+    "pillow": "13.0.0",
+    "fastapi": "0.162.0",
+    "uvicorn": "0.54.0",
+    "httpx": "0.28.1",
+    "pytest": "9.1.1",
+    "ruff": "0.17.2"
+  },
+  "serving_process": {
+    "pid": 6848,
+    "rss_mib": 450.4765625,
+    "peak_rss_mib": 543.1796875,
+    "note": "Single local Keras API process after 11 Grad-CAM and classification requests; other machine processes excluded"
+  }
+}

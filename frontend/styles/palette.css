@@ -1,0 +1,47 @@
+/* NeuroDetect: dark navy, restrained violet, and clear readable surfaces. */
+:root {
+  color-scheme: dark;
+  --background: #0B1026;
+  --surface: #111A36;
+  --surface-raised: #182344;
+  --text: #F0F3FC;
+  --muted: #B7C2DF;
+  --accent: #A99BFF;
+  --accent-blue: #9BCBFF;
+  --border: #344263;
+}
+body { background: radial-gradient(ellipse at top right, #202344, var(--background) 65%); color: var(--text); }
+nav { background: rgba(11,16,38,.94); border-bottom: 1px solid var(--border); backdrop-filter: blur(14px); }
+nav a { color: var(--muted); text-shadow: none; }
+nav a:hover, nav a.active { color: var(--accent); text-shadow: none; }
+.logo, .hero h1 { background: linear-gradient(120deg, var(--text), var(--accent)); background-clip: text; -webkit-background-clip: text; }
+.brand-overlay { color: var(--text); text-shadow: 0 4px 24px var(--background); }
+.brand-overlay span { color: var(--accent-blue); }
+.synapses-frame { background: var(--background); }
+.synapses-frame iframe { opacity: .7; mix-blend-mode: normal; filter: none; }
+body[data-page="home"] .hero-stage::after { background: linear-gradient(0deg, var(--background), transparent); }
+.about-card, .feature-card, .features .feature-card, .features.carousel .feature-card,
+.detector-container, .detector-card, .detector-controls, .preview-container, .media-frame,
+.prediction-card, .chat-container, .detector-chat, .raw-output, .assistant-panel,
+.learn-card, .citation-card, .tech-item { background: var(--surface); border-color: var(--border); color: var(--text); }
+button, input[type="file"]::file-selector-button, .cta-button {
+  background: var(--accent); color: var(--background); box-shadow: 0 5px 16px rgba(0,0,0,.14);
+}
+button:hover:not(:disabled), .cta-button:hover { background: #C4BAFF; color: var(--background); }
+.btn-secondary { background: var(--surface-raised); color: var(--text); border: 1px solid var(--border); }
+input, input[type="file"], .assistant-form input { background: var(--background); color: var(--text); border-color: var(--border); }
+input::placeholder { color: var(--muted); opacity: 1; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid var(--accent-blue); outline-offset: 3px; }
+.status-badge, .status-badge.success { color: var(--accent-blue); background: var(--surface-raised); }
+.status-badge.error, .error-card { color: var(--text); background: #352648; border-color: var(--accent); }
+.main-result, .main-result.tumor, .main-result.normal { background: linear-gradient(120deg, var(--surface), #26274C); border-color: var(--accent); }
+.prediction-card.selected { background: var(--surface-raised); border-color: var(--accent); }
+.class-fill { background: linear-gradient(90deg, var(--accent), var(--accent-blue)); }
+.class-bar { background: var(--border); }
+.assistant-fab { background: var(--accent); color: var(--background); }
+.assistant-message.user, .chat-message.user { background: var(--surface-raised); color: var(--text); }
+.assistant-message.assistant, .chat-message.assistant { background: var(--background); color: var(--text); }
+.result-stages { margin-top: 20px; padding: 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text); }
+.result-stages p { margin-bottom: 12px; line-height: 1.6; }
+.result-stages button { margin-bottom: 12px; }
+[hidden] { display: none !important; }

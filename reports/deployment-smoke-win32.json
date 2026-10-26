@@ -1,0 +1,13 @@
+{
+  "start_command": "uvicorn backend.app:app --host 0.0.0.0 --port $PORT --workers 1",
+  "python": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+  "observed_loading": true,
+  "model_sha256": "13163374b4ea2401363a95ddaca153fdf863a6ae7936df8d6c1a25d92a385baf",
+  "predicted_class": "notumor",
+  "ready": true,
+  "prediction": true,
+  "heatmap": true,
+  "invalid_upload": true,
+  "chat_without_key": true,
+  "hosted_cors": true
+}

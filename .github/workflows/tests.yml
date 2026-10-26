@@ -1,0 +1,54 @@
+name: Tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      integration:
+        description: Run real TensorFlow and MRI regression tests
+        type: boolean
+        default: false
+jobs:
+  unit:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements-test.txt
+      - run: ruff check backend tests scripts
+      - run: ruff format --check backend tests scripts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --prefix frontend
+      - run: npm test --prefix frontend
+      - run: pytest --junitxml=reports/unit.xml --cov=backend --cov-report=xml:reports/coverage.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: reports/*.xml
+  integration:
+    timeout-minutes: 20
+    if: github.event_name != 'workflow_dispatch' || inputs.integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r backend/requirements.txt -r requirements-test.txt
+      - run: pytest --integration --junitxml=reports/integration.xml
+      - run: python scripts/deployment_smoke.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integration-results
+          path: reports/*.xml

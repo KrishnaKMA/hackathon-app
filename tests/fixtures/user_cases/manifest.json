@@ -1,0 +1,60 @@
+{
+  "source": "User supplied Downloads/code; labels not supplied",
+  "cases": [
+    {
+      "file": "1.webp",
+      "expected_class": null,
+      "sha256": "7934f010ca5885ba8c98ffec7a120e2c32ae80deb9f4b9f6bebe2da5bd29df1b"
+    },
+    {
+      "file": "2.webp",
+      "expected_class": null,
+      "sha256": "7934f010ca5885ba8c98ffec7a120e2c32ae80deb9f4b9f6bebe2da5bd29df1b"
+    },
+    {
+      "file": "3.webp",
+      "expected_class": null,
+      "sha256": "2db341881fa5fd6cbf5d8cc96c2db255c093aba2343f5ede35fda618225412e6"
+    },
+    {
+      "file": "4.webp",
+      "expected_class": null,
+      "sha256": "00efc716ddd352cd2443e6415035465c0a4bca8f38ece4c77433235a2d203547"
+    },
+    {
+      "file": "5.webp",
+      "expected_class": null,
+      "sha256": "e8727372c992cd1c3ba2b7e695ba57387cc3d4d963f6b61f2d43b01b35d5a528"
+    },
+    {
+      "file": "6.webp",
+      "expected_class": null,
+      "sha256": "bcb4296f87f53ea447ef6fa89a0d0fe4d6352486fd98f416a09f565772cd1d61"
+    },
+    {
+      "file": "7.webp",
+      "expected_class": null,
+      "sha256": "5db74742ec27e2187a0bcdab4567652d0c404832dd809b26f143791991aea3bd"
+    },
+    {
+      "file": "8.webp",
+      "expected_class": null,
+      "sha256": "5db74742ec27e2187a0bcdab4567652d0c404832dd809b26f143791991aea3bd"
+    },
+    {
+      "file": "9.webp",
+      "expected_class": null,
+      "sha256": "4d6bb11e91a403d2198d8d3cf694f88566d9e684d9e32512fcd33c9baec40903"
+    },
+    {
+      "file": "10.webp",
+      "expected_class": null,
+      "sha256": "aa78032d659f4158d82c5c77834f6c6c66349160509972222cc560749868acab"
+    },
+    {
+      "file": "11.webp",
+      "expected_class": null,
+      "sha256": "ed3a18cce54085ca08f13c681d1818a04ef376342177ad7a314160100cbcb742"
+    }
+  ]
+}

@@ -5,35 +5,35 @@
         }
 
         .citation-section {
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.05) 0%, rgba(255, 100, 229, 0.05) 100%);
-            border: 1px solid rgba(100, 200, 255, 0.1);
+            background: linear-gradient(135deg, rgba(169, 155, 255, 0.05) 0%, rgba(155, 203, 255, 0.05) 100%);
+            border: 1px solid rgba(169, 155, 255, 0.1);
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 24px;
         }
 
         .citation-section h3 {
-            color: #64c8ff;
+            color: var(--text);
             font-size: 18px;
             margin-bottom: 16px;
         }
 
         .citation-item {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(17, 26, 54, 0.2);
             padding: 16px;
             border-radius: 8px;
             margin-bottom: 12px;
-            border-left: 3px solid #ff64e5;
+            border-left: 3px solid #9BCBFF;
         }
 
         .citation-item p {
-            color: #a0a0a0;
+            color: var(--text);
             line-height: 1.6;
             margin-bottom: 8px;
         }
 
         .citation-item a {
-            color: #64c8ff;
+            color: var(--text);
             text-decoration: none;
             word-break: break-all;
         }
@@ -44,7 +44,7 @@
 
         .gradient-title {
             margin-bottom: 30px;
-            background: linear-gradient(135deg, #64c8ff 0%, #ff64e5 100%);
+            background: linear-gradient(135deg, #A99BFF 0%, #9BCBFF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -58,8 +58,8 @@
         .loading-spinner {
             width: 40px;
             height: 40px;
-            border: 3px solid rgba(100, 200, 255, 0.1);
-            border-top: 3px solid #64c8ff;
+            border: 3px solid rgba(169, 155, 255, 0.1);
+            border-top: 3px solid #A99BFF;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin: 0 auto 16px;
@@ -70,7 +70,7 @@
         }
 
         .loading-text {
-            color: #a0a0a0;
+            color: var(--text);
         }
 
         .button-group {

@@ -1,0 +1,430 @@
+[
+  {
+    "status": "M",
+    "file": ".gitignore"
+  },
+  {
+    "status": "M",
+    "file": "backend/app.py"
+  },
+  {
+    "status": "M",
+    "file": "backend/config.py"
+  },
+  {
+    "status": "M",
+    "file": "backend/model_loader.py"
+  },
+  {
+    "status": "M",
+    "file": "backend/requirements.txt"
+  },
+  {
+    "status": "M",
+    "file": "backend/utils.py"
+  },
+  {
+    "status": "M",
+    "file": "frontend/index.html"
+  },
+  {
+    "status": "M",
+    "file": "frontend/js/api.js"
+  },
+  {
+    "status": "M",
+    "file": "frontend/js/chat.js"
+  },
+  {
+    "status": "M",
+    "file": "frontend/js/pages/detector.js"
+  },
+  {
+    "status": "M",
+    "file": "frontend/js/ui.js"
+  },
+  {
+    "status": "M",
+    "file": "frontend/partials/citations.html"
+  },
+  {
+    "status": "M",
+    "file": "frontend/partials/detector.html"
+  },
+  {
+    "status": "M",
+    "file": "frontend/partials/footer.html"
+  },
+  {
+    "status": "M",
+    "file": "frontend/partials/head.html"
+  },
+  {
+    "status": "M",
+    "file": "frontend/partials/home.html"
+  },
+  {
+    "status": "M",
+    "file": "frontend/partials/learn.html"
+  },
+  {
+    "status": "M",
+    "file": "frontend/scripts/build_index.py"
+  },
+  {
+    "status": "M",
+    "file": "frontend/styles.css"
+  },
+  {
+    "status": "M",
+    "file": "frontend/styles/assistant.css"
+  },
+  {
+    "status": "M",
+    "file": "frontend/styles/base.css"
+  },
+  {
+    "status": "M",
+    "file": "frontend/styles/citations.css"
+  },
+  {
+    "status": "M",
+    "file": "frontend/styles/detector.css"
+  },
+  {
+    "status": "M",
+    "file": "frontend/styles/home.css"
+  },
+  {
+    "status": "M",
+    "file": "frontend/styles/learn.css"
+  },
+  {
+    "status": "M",
+    "file": "frontend/styles/responsive.css"
+  },
+  {
+    "status": "M",
+    "file": "requirements.txt"
+  },
+  {
+    "status": "??",
+    "file": ".env.example"
+  },
+  {
+    "status": "??",
+    "file": ".github/workflows/evaluate.yml"
+  },
+  {
+    "status": "??",
+    "file": ".github/workflows/tests.yml"
+  },
+  {
+    "status": "??",
+    "file": "README.md"
+  },
+  {
+    "status": "??",
+    "file": "backend/routes/__init__.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/routes/chat.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/routes/health.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/routes/heatmap.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/routes/predict.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/routes/uploads.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/schemas/__init__.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/schemas/chat.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/schemas/prediction.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/services/__init__.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/services/chat_service.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/services/evaluation.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/services/heatmap_service.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/services/llm_service.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/services/ml_service.py"
+  },
+  {
+    "status": "??",
+    "file": "backend/services/runtime.py"
+  },
+  {
+    "status": "??",
+    "file": "frontend/js/config.js"
+  },
+  {
+    "status": "??",
+    "file": "frontend/package-lock.json"
+  },
+  {
+    "status": "??",
+    "file": "frontend/package.json"
+  },
+  {
+    "status": "??",
+    "file": "frontend/styles/palette.css"
+  },
+  {
+    "status": "??",
+    "file": "frontend/tests/detector.test.cjs"
+  },
+  {
+    "status": "??",
+    "file": "pytest.ini"
+  },
+  {
+    "status": "??",
+    "file": "render.yaml"
+  },
+  {
+    "status": "??",
+    "file": "reports/EVALUATION_TRACKING.md"
+  },
+  {
+    "status": "??",
+    "file": "reports/UPGRADE_REPORT.md"
+  },
+  {
+    "status": "??",
+    "file": "reports/api-final.xml"
+  },
+  {
+    "status": "??",
+    "file": "reports/benchmark-threads-0.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/benchmark-threads-1.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/benchmark-threads-2.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/benchmark-threads-4.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/browser-timing.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/coverage.xml"
+  },
+  {
+    "status": "??",
+    "file": "reports/deployed-reference.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/endpoint-benchmark-initial.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/endpoint-benchmark.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/environment.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/evaluations/20261026T135651977829Z.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/evaluations/20261026T135651977829Z.md"
+  },
+  {
+    "status": "??",
+    "file": "reports/evaluations/baseline.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/evaluations/latest.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/evaluations/latest.md"
+  },
+  {
+    "status": "??",
+    "file": "reports/files-changed.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/integration.xml"
+  },
+  {
+    "status": "??",
+    "file": "reports/labelled-regression.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/serving-evaluations/20261026T140203786477Z.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/serving-evaluations/20261026T140203786477Z.md"
+  },
+  {
+    "status": "??",
+    "file": "reports/serving-evaluations/latest.json"
+  },
+  {
+    "status": "??",
+    "file": "reports/serving-evaluations/latest.md"
+  },
+  {
+    "status": "??",
+    "file": "reports/unit.xml"
+  },
+  {
+    "status": "??",
+    "file": "requirements-test.txt"
+  },
+  {
+    "status": "??",
+    "file": "ruff.toml"
+  },
+  {
+    "status": "??",
+    "file": "scripts/benchmark.py"
+  },
+  {
+    "status": "??",
+    "file": "scripts/benchmark_endpoints.py"
+  },
+  {
+    "status": "??",
+    "file": "scripts/capture_deployed.py"
+  },
+  {
+    "status": "??",
+    "file": "scripts/evaluate.py"
+  },
+  {
+    "status": "??",
+    "file": "tests/conftest.py"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/1.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/10.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/11.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/2.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/3.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/4.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/5.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/6.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/7.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/8.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/9.webp"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/deployed_predictions.json"
+  },
+  {
+    "status": "??",
+    "file": "tests/fixtures/user_cases/manifest.json"
+  },
+  {
+    "status": "??",
+    "file": "tests/test_api.py"
+  },
+  {
+    "status": "??",
+    "file": "tests/test_evaluation.py"
+  },
+  {
+    "status": "??",
+    "file": "tests/test_heatmap.py"
+  },
+  {
+    "status": "??",
+    "file": "tests/test_llm.py"
+  },
+  {
+    "status": "??",
+    "file": "tests/test_model_loading.py"
+  },
+  {
+    "status": "??",
+    "file": "tests/test_performance.py"
+  },
+  {
+    "status": "??",
+    "file": "tests/test_prediction.py"
+  }
+]

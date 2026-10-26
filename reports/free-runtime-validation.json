@@ -1,0 +1,36 @@
+{
+  "source_model_sha256": "13163374b4ea2401363a95ddaca153fdf863a6ae7936df8d6c1a25d92a385baf",
+  "runtime_sha256": "6ce79098574f601163c43c33b7765b27dacd10effbcccad78475291571cead9a",
+  "classification_agreement": {
+    "correct": 1311,
+    "total": 1311
+  },
+  "metric_deltas": {
+    "accuracy": 0.0,
+    "macro_f1": 0.0,
+    "weighted_f1": 0.0
+  },
+  "gradcam_equivalence": "15 cases: all 11 supplied images plus one correctly predicted representative of each class; atol=.005, rtol=.02",
+  "linux_tests": {
+    "passed": 74,
+    "skipped": 7
+  },
+  "max_image_smoke": {
+    "start_command": "uvicorn backend.app:app --host 0.0.0.0 --port $PORT --workers 1",
+    "python": "3.12.10 (main, May 30 2025, 05:37:37) [Clang 20.1.4 ]",
+    "observed_loading": true,
+    "model_sha256": "13163374b4ea2401363a95ddaca153fdf863a6ae7936df8d6c1a25d92a385baf",
+    "predicted_class": "notumor",
+    "max_pixel_heatmap_runs": 3,
+    "rss_mib": 126.26171875,
+    "peak_rss_mib": 235.5625,
+    "ready": true,
+    "prediction": true,
+    "heatmap": true,
+    "invalid_upload": true,
+    "chat_without_key": true,
+    "hosted_cors": true
+  },
+  "original_keras_weights": "unchanged",
+  "production_dependencies": "backend/requirements-render.txt; no TensorFlow"
+}

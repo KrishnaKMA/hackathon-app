@@ -12,3 +12,18 @@ backend/.venv/
 # OS
 .DS_Store
 Thumbs.db
+
+.env
+.env.*
+!.env.example
+*.log
+
+.coverage
+.pytest_cache/
+.ruff_cache/
+reports/*.tflite
+reports/*.jpg
+reports/*.png
+reports/*.log
+
+node_modules/

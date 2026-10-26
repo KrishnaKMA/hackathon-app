@@ -1,0 +1,206 @@
+{
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 181 Stepping 0, GenuineIntel",
+  "logical_cpus": 14,
+  "python": "3.13.14",
+  "tensorflow": "2.21.0",
+  "threads": 1,
+  "inter_threads": 1,
+  "runs": 30,
+  "configurations": {
+    "original_predict": {
+      "median_ms": 177.85799999546725,
+      "p95_ms": 208.94270000280812,
+      "n": 30,
+      "max_probability_delta": 0.0,
+      "class_agreement": 1.0,
+      "rss_mib": 411.64453125
+    },
+    "direct_keras": {
+      "median_ms": 296.5388000011444,
+      "p95_ms": 329.7550599934766,
+      "n": 30,
+      "max_probability_delta": 1.996755599975586e-06,
+      "class_agreement": 1.0,
+      "rss_mib": 410.7421875
+    }
+  },
+  "load_ms": 2361.9474999723025,
+  "cold_predict_ms": 1810.329100000672,
+  "preprocessing": {
+    "median_ms": 9.47995000751689,
+    "p95_ms": 12.100505002308637,
+    "n": 30
+  },
+  "user_case_outputs": [
+    {
+      "file": "1.webp",
+      "predicted_class": "notumor",
+      "probabilities": [
+        0.00014778238255530596,
+        0.13560178875923157,
+        0.8641223907470703,
+        0.0001280194555874914
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "2.webp",
+      "predicted_class": "notumor",
+      "probabilities": [
+        0.00014778238255530596,
+        0.13560178875923157,
+        0.8641223907470703,
+        0.0001280194555874914
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "3.webp",
+      "predicted_class": "meningioma",
+      "probabilities": [
+        0.10830269008874893,
+        0.49030938744544983,
+        0.34788790345191956,
+        0.05350007489323616
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "4.webp",
+      "predicted_class": "notumor",
+      "probabilities": [
+        7.69271309764008e-07,
+        1.2994980352232233e-05,
+        0.9999862909317017,
+        5.523677071295197e-10
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "5.webp",
+      "predicted_class": "notumor",
+      "probabilities": [
+        1.4239216739042604e-07,
+        0.00028586926055140793,
+        0.9997139573097229,
+        3.7380667450293e-09
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "6.webp",
+      "predicted_class": "meningioma",
+      "probabilities": [
+        0.004342846572399139,
+        0.8219332695007324,
+        0.16912002861499786,
+        0.004603856708854437
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "7.webp",
+      "predicted_class": "meningioma",
+      "probabilities": [
+        0.11338973045349121,
+        0.6146261096000671,
+        0.02857551909983158,
+        0.2434086799621582
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "8.webp",
+      "predicted_class": "meningioma",
+      "probabilities": [
+        0.11338973045349121,
+        0.6146261096000671,
+        0.02857551909983158,
+        0.2434086799621582
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "9.webp",
+      "predicted_class": "meningioma",
+      "probabilities": [
+        0.00241734622977674,
+        0.8246915936470032,
+        0.14501455426216125,
+        0.027876559644937515
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "10.webp",
+      "predicted_class": "pituitary",
+      "probabilities": [
+        2.8847454814240336e-05,
+        0.08721990138292313,
+        0.43061885237693787,
+        0.4821324050426483
+      ],
+      "expected_class": null
+    },
+    {
+      "file": "11.webp",
+      "predicted_class": "notumor",
+      "probabilities": [
+        2.4981047772598686e-06,
+        0.004114119336009026,
+        0.564265787601471,
+        0.4316176474094391
+      ],
+      "expected_class": null
+    }
+  ],
+  "labelled_regression": {
+    "n": 40,
+    "correct": 39,
+    "accuracy": 0.975,
+    "files": [
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0010.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0011.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0012.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0013.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0014.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0015.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0016.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0017.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0018.jpg",
+      "test_images\\kaggle_samples\\glioma\\Te-gl_0019.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0010.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0011.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0012.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0013.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0014.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0015.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0016.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0017.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0018.jpg",
+      "test_images\\kaggle_samples\\meningioma\\Te-me_0019.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0010.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0011.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0012.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0013.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0014.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0015.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0016.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0017.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0018.jpg",
+      "test_images\\kaggle_samples\\notumor\\Te-no_0019.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0010.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0011.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0012.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0013.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0014.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0015.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0016.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0017.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0018.jpg",
+      "test_images\\kaggle_samples\\pituitary\\Te-pi_0019.jpg"
+    ]
+  },
+  "peak_rss_mib": 439.56640625
+}

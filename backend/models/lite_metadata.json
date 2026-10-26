@@ -1,0 +1,8 @@
+{
+  "source_sha256": "13163374b4ea2401363a95ddaca153fdf863a6ae7936df8d6c1a25d92a385baf",
+  "tflite_sha256": "6ce79098574f601163c43c33b7765b27dacd10effbcccad78475291571cead9a",
+  "quantization": "none; float32",
+  "conv_layer": "Conv_1",
+  "gradcam": "Analytic chain rule through BatchNorm, ReLU6, GAP and original Dense/ReLU head",
+  "head_sha256": "e724865bd8994d3c8daee0fc49aa77eddbc7e2cc6e0073853381d4d1607bc9f0"
+}

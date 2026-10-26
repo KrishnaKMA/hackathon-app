@@ -1,0 +1,162 @@
+[
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0010.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0011.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0012.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0013.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0014.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0015.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0016.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0017.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0018.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/glioma/Te-gl_0019.jpg",
+    "expected_class": "glioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0010.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0011.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0012.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0013.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0014.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0015.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0016.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0017.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0018.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/meningioma/Te-me_0019.jpg",
+    "expected_class": "meningioma"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0010.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0011.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0012.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0013.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0014.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0015.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0016.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0017.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0018.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/notumor/Te-no_0019.jpg",
+    "expected_class": "notumor"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0010.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0011.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0012.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0013.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0014.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0015.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0016.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0017.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0018.jpg",
+    "expected_class": "pituitary"
+  },
+  {
+    "file": "test_images/kaggle_samples/pituitary/Te-pi_0019.jpg",
+    "expected_class": "pituitary"
+  }
+]

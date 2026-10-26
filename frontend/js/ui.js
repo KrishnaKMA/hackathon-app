@@ -72,12 +72,11 @@ window.AppModules.ui = (() => {
 
   function showError(resultEl, message) {
     if (!resultEl) return;
-    resultEl.innerHTML = `
-      <div class="error-card">
-        <div class="error-title">Request failed</div>
-        <div class="error-message">${message}</div>
-      </div>
-    `;
+    resultEl.replaceChildren();
+    const card = document.createElement("div"); card.className = "error-card";
+    const title = document.createElement("div"); title.className = "error-title"; title.textContent = "Request failed";
+    const detail = document.createElement("div"); detail.className = "error-message"; detail.textContent = message;
+    card.append(title, detail); resultEl.append(card);
     const rawOutput = document.getElementById("rawOutput");
     if (rawOutput) rawOutput.textContent = "{ }";
   }

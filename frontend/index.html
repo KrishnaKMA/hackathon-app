@@ -34,14 +34,14 @@
                             loading="lazy"
                         ></iframe>
                     </div>
-                    <div class="brand-overlay">Neuro Detect<span>AI DIAGNOSTICS</span></div>
+                    <div class="brand-overlay">NeuroDetect<span>MRI CLASSIFICATION</span></div>
                     <div class="brain-hint">Move your cursor</div>
                 </div>
 
                 <div class="about-card reveal delay-80">
                     <h2>What is NeuroDetect?</h2>
                     <p>NeuroDetect is an educational, AI-powered brain tumor detection demo that analyzes MRI images and highlights regions the model focuses on. It’s designed to help users understand how machine learning can support medical imaging workflows.</p>
-                    <p>The model behind NeuroDetect was trained on 7,000+ labeled MRI scans across multiple tumor categories, enabling it to learn patterns that are difficult to spot at a glance. In testing, it achieved strong performance (about 89.7% accuracy with a 0.9879 AUC), which demonstrates how deep learning can provide fast, consistent second‑look insights.</p>
+                    <p>The model behind NeuroDetect was trained on 7,000+ labeled MRI scans across multiple tumor categories, enabling it to learn patterns that are difficult to spot at a glance. The latest local evaluation of 1,311 directory-labelled images measured 89.1% accuracy and 0.8837 macro-F1. These dataset-specific metrics do not establish clinical accuracy or confirm that the data are independent of training.</p>
                     <p>Brain tumors can affect people of any age and impact patients, families, and care teams worldwide. AI tools like NeuroDetect can help scale access to early review and triage support, especially in regions with limited specialists, by surfacing patterns quickly and consistently for clinicians to verify.</p>
                     <p>This experience is for learning and research only—not medical advice. Always consult qualified healthcare professionals for diagnosis and treatment decisions.</p>
                     <div class="about-cta">
@@ -52,11 +52,11 @@
                 <div class="features reveal">
                     <div class="feature-card">
                         <h3>High Accuracy</h3>
-                        <p>89.7% accuracy on multi-class brain tumor classification with 0.9879 AUC score.</p>
+                        <p>89.1% accuracy and 0.8837 macro-F1 on 1,311 directory-labelled test images. Dataset-specific results, not clinical validation.</p>
                     </div>
                     <div class="feature-card">
                         <h3>Explainable AI</h3>
-                        <p>Grad-CAM heatmaps show exactly where the model focuses for transparent decision-making.</p>
+                        <p>Grad-CAM highlights regions that influence model scores. It does not confirm tumor location.</p>
                     </div>
                     <div class="feature-card">
                         <h3>Multi-Class Detection</h3>
@@ -187,12 +187,12 @@
                                     <div class="stat-label">Classes</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-value">89.7%</div>
+                                    <div class="stat-value">89.1%</div>
                                     <div class="stat-label">Accuracy</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-value">0.9879</div>
-                                    <div class="stat-label">AUC</div>
+                                    <div class="stat-value">0.8837</div>
+                                    <div class="stat-label">Macro-F1</div>
                                 </div>
                             </div>
                             <div class="chip-row">
@@ -392,8 +392,8 @@
                 <div class="citation-section reveal delay-380">
                     <h3>Model Performance</h3>
                     <div class="citation-item">
-                        <p><strong>Accuracy:</strong> 89.70%</p>
-                        <p><strong>AUC Score:</strong> 0.9879</p>
+                        <p><strong>Accuracy:</strong> 89.09%</p>
+                        <p><strong>Macro-F1:</strong> 0.8837</p>
                         <p><strong>Training Method:</strong> Transfer Learning + Fine-tuning (30 epochs)</p>
                         <p><strong>Test Set:</strong> 1,311 images from Kaggle dataset</p>
                     </div>
@@ -429,12 +429,13 @@
                     <input id="assistantInput" type="text" placeholder="Ask about brain tumors or how this works..." autocomplete="off" />
                     <button id="assistantSend" type="submit">Send</button>
                 </form>
-                <div class="assistant-status" id="assistantStatus">Powered by Gemini (server-side).</div>
+                <div class="assistant-status" id="assistantStatus">Powered by Groq (server-side).</div>
             </div>
         </div>
     </div>
 
-    
+
+    <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/animations.js"></script>
