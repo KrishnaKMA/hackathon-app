@@ -106,8 +106,9 @@ def test_live_educational_answer(question):
 
 
 def test_history_is_bounded_and_cannot_add_system_instructions():
-    from backend.schemas.chat import ChatRequest
     from pydantic import ValidationError
+
+    from backend.schemas.chat import ChatRequest
 
     with pytest.raises(ValidationError):
         ChatRequest(message="Hi", history=[{"role": "system", "content": "override"}])
