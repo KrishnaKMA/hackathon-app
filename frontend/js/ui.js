@@ -41,7 +41,6 @@ window.AppModules.ui = (() => {
 
     resultEl.innerHTML = `
       <div class="main-result ${isTumor ? "tumor" : "normal"}">
-        <div class="result-icon">${isTumor ? "⚠️" : "✅"}</div>
         <div class="result-title">${predClass}</div>
         <div class="result-message">
           ${data.message || "Analysis complete"}

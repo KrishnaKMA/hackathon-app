@@ -26,7 +26,6 @@ input[type="file"]::file-selector-button { border: 0; padding: 10px 14px; margin
 .heatmap-note { margin-top: 12px; font-size: 12px; line-height: 1.5; color: var(--muted); }
 .result-placeholder { color: var(--muted); font-size: 14px; }
 .main-result { border-left: 3px solid var(--accent); padding: 18px; border-radius: 10px; margin-bottom: 16px; text-align: left; }
-.result-icon { font-size: 22px; margin-bottom: 8px; }
 .result-title { font-size: 25px; font-weight: 700; margin-bottom: 6px; }
 .result-message { font-size: 13px; line-height: 1.5; color: var(--muted); }
 .result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
