@@ -1,4 +1,6 @@
 name: Tests
+permissions:
+  contents: read
 on:
   push:
   pull_request:
@@ -52,3 +54,44 @@ jobs:
         with:
           name: integration-results
           path: reports/*.xml
+  deploy:
+    needs: [unit, integration]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    concurrency:
+      group: render-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: https://hackathon-app-adb9.onrender.com/ui/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements-test.txt
+      - name: Deploy tested commit and verify production
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          EXPECTED_REVISION: ${{ github.sha }}
+          PRODUCTION_URL: https://hackathon-app-adb9.onrender.com
+        run: python scripts/monitor_production.py --deploy
+      - name: Evaluate the deployed model on labelled validation data
+        run: >-
+          python scripts/evaluate.py
+          --api-url https://hackathon-app-adb9.onrender.com
+          --model-version "$GITHUB_SHA"
+          --compare reports/evaluations/baseline.json
+          --output reports/deployed-evaluations
+      - name: Publish evaluation summary
+        run: cat reports/deployed-evaluations/latest.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: production-deployment-${{ github.sha }}
+          path: |
+            reports/production-check.json
+            reports/deployed-evaluations/
+          retention-days: 90

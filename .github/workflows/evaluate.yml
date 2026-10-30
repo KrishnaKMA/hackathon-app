@@ -1,6 +1,5 @@
 name: Deployed model evaluation
 on:
-  deployment_status:
   workflow_dispatch:
   schedule:
     - cron: '15 14 * * 1'
@@ -11,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   evaluate:
-    if: vars.EVALUATION_API_URL != '' && (github.event_name != 'deployment_status' || github.event.deployment_status.state == 'success')
+    if: vars.EVALUATION_API_URL != ''
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:

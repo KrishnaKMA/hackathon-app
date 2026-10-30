@@ -1,3 +1,5 @@
+import os
+
 from fastapi import APIRouter, HTTPException, Request
 
 from ..config import CLASS_NAMES, NUM_CLASSES
@@ -26,6 +28,7 @@ def ready(request: Request):
         raise HTTPException(503, "ML model is not ready")
     return {
         "status": "ready",
+        "revision": os.getenv("RENDER_GIT_COMMIT"),
         "model_backend": getattr(request.app.state.model, "backend", "keras"),
         "runtime_sha256": getattr(request.app.state.model, "runtime_sha256", None),
         "model_sha256": getattr(request.app.state.model, "_neurodetect_sha256", None),
